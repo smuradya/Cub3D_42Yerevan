@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/17 17:35:08 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:54:32 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ struct s_player
 {
 	t_vector	pos;
 	t_vector	dir;
+	double		angle;
+	double 		cdir; 
 };
 
 struct	s_data

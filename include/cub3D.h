@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/17 17:30:13 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:20:44 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_vector	new_vector(double x, double y);
 double	camera_x(int x);
 t_vector	ray_vector(t_data	*data, int x);
 void		game_start(t_data *data);
+int	update_loop(int k, t_data *data);
+void	movemant(int k, t_data *data);
 
 
 #endif
