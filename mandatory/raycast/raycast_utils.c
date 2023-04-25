@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:04:16 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/19 19:50:28 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:59:45 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,86 +35,104 @@ void	delta_dist(t_data *data)
 		data->delta_dist.y = fabs(1 / data->ray.y);
 }
 
+void	checking_rays(t_data *data)
+{
+	int	map_y;
+	int	map_x;
+
+	map_y = (int)data->player.pos.y;
+	map_x = (int)data->player.pos.x;
+	if (data->ray.x < 0)
+	{
+		data->draw.step_x = -1;
+		data->dist.x = (data->player.pos.x - map_x) * data->delta_dist.x;
+	}
+	else
+	{
+		data->draw.step_x = 1;
+		data->dist.x = (map_x + 1.0 - data->player.pos.x) * data->delta_dist.x;
+	}
+	if (data->ray.y < 0)
+	{
+		data->draw.step_y = -1;
+		data->dist.y = (data->player.pos.y - map_y) * data->delta_dist.y;
+	}
+	else
+	{
+		data->draw.step_y = 1;
+		data->dist.y = (map_y + 1.0 - data->player.pos.y) * data->delta_dist.y;
+	}
+}
+
+void	raycast_algorithm(t_data *data)
+{
+	int	map_y;
+	int	map_x;
+	int	hit;
+
+	hit = 0;
+	map_y = (int)data->player.pos.y;
+	map_x = (int)data->player.pos.x;
+	while (!hit)
+	{
+		if (data->dist.x < data->dist.y)
+		{
+			data->dist.x += data->delta_dist.x;
+			map_x += data->draw.step_x;
+			data->draw.side = 0;
+		}
+		else
+		{
+			data->dist.y += data->delta_dist.y;
+			map_y += data->draw.step_y;
+			data->draw.side = 1;
+		}
+		if (data->mix_map[map_y][map_x] == '1')
+			hit = 1;
+	}		
+}
+
+void	start_and_end(t_data *data)
+{
+	int	line_height;
+
+	if (data->draw.side == 0)
+		data->player.wall_dis = (data->dist.x - data->delta_dist.x);
+	else
+		data->player.wall_dis = (data->dist.y - data->delta_dist.y);
+	line_height = (int)(WIN_HIGHT / data->player.wall_dis);
+	data->draw_start = -line_height / 2 + WIN_HIGHT / 2;
+	if (data->draw_start < 0)
+		data->draw_start = 0;
+	data->draw_end = line_height / 2 + WIN_HIGHT / 2;
+	if (data->draw_end >= WIN_HIGHT)
+		data->draw_end = WIN_HIGHT - 1;
+}
+
 void	game_start(t_data *data)
 {
 	int	x;
+	int	i, start, end;
 
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		camera_x(x);
 		ray(data, x);
-		int mapX = (int)data->player.pos.x;
-		int mapY = (int)data->player.pos.y;
 		delta_dist(data);
-		
-		double perpWallDist;
-
-		int stepX;
-		int stepY;
-
-		int hit = 0;
-		int side;
-		if(data->ray.x < 0)
-		{
-			stepX = -1;
-			data->side_dist.x = (data->player.pos.x - mapX) * data->delta_dist.x;
-		}
-		else
-		{
-			stepX = 1;
-			data->side_dist.x = (mapX + 1.0 - data->player.pos.x) * data->delta_dist.x;
-		}
-		if (data->ray.y < 0)
-		{
-			stepY = -1;
-			data->side_dist.y = (data->player.pos.y - mapY) * data->delta_dist.y;
-		}
-		else
-		{
-			stepY = 1;
-			data->side_dist.y = (mapY + 1.0 - data->player.pos.y) * data->delta_dist.y;
-		}
-		while(hit == 0)
-		{
-			if(data->side_dist.x < data->side_dist.y)
-			{
-				data->side_dist.x += data->delta_dist.x;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				data->side_dist.y += data->delta_dist.y;
-				mapY += stepY;
-				side = 1;
-			}
-			if(data->mix_map[mapY][mapX] == '1')
-				hit = 1;
-		}
-		if(side == 0)
-			perpWallDist = (data->side_dist.x - data->delta_dist.x);
-		else
-			perpWallDist = (data->side_dist.y - data->delta_dist.y);
-		int lineHeight = (int)(WIN_HIGHT / perpWallDist);
-		data->draw_start = -lineHeight / 2 + WIN_HIGHT / 2;
-		
-		if(data->draw_start < 0)
-			data->draw_start = 0;
-		data->draw_end = lineHeight / 2 + WIN_HIGHT / 2;
-		if(data->draw_end >= WIN_HIGHT)
-			data->draw_end = WIN_HIGHT - 1;
-		int	i, start, end;
-
+		checking_rays(data);
+		raycast_algorithm(data);
+		start_and_end(data);
 		i = -1;
 		start = data->draw_start - 1;
 		end = data->draw_end - 1;
 		while (++i < data->draw_start)
-			mlx_pixel_put(data->mlx, data->window, x, i, 0xd99033);
+			mlx_pixel_put(data->mlx, data->window, x, i, 0x499033 * 100 / 40);
 		while (++start < data->draw_end)
-			mlx_pixel_put(data->mlx, data->window, x, start, 0x9774e7);
+			mlx_pixel_put(data->mlx, data->window, x, start, 0x9774e7 * 100 / 50 - 10);
 		while (++end < WIN_HIGHT)
-			mlx_pixel_put(data->mlx, data->window, x, end, 0xf99983d);
+			mlx_pixel_put(data->mlx, data->window, x, end, 0xf99983d + 100);
 		x++;
-    }
+	}
 }
+

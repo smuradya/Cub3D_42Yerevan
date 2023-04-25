@@ -1,6 +1,13 @@
 #include "cub3D.h"
 
-int main (int argc, char **argv)
+int	close_function(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->window);
+	exit(0);
+	return (0);
+}
+
+int main(int argc, char **argv)
 {
     t_data  *data;
     if (argc != 2)
@@ -29,24 +36,35 @@ int main (int argc, char **argv)
         map[i++] = line;
         line = get_next_line(fd);
     }
+    while(map[++i] == 0)
+    {
+        ;
+    }
     // i = -1;
     // while (map[++i])
     // {
     //     write(1, map[i], strlen(map[i]));
     //     write(1, "\n", 1);
     // }
-
+    
     data = malloc(sizeof(t_data));
     data->player.pos = new_vector(17, 7);
     data->player.dir = new_vector(-1, 0);
     data->plane = new_vector(0, 0.66);
-    data->player.cdir = 0.0;
-
     data->mix_map = map;
+    data->draw.step_x = 0;
+    data->draw.step_y = 0;
+    data->draw.side = 0;
+    data->player.wall_dis = 0.0;
+    //data->mouse = init_mouse();
     data->mlx = mlx_init();
+    data->mouse.horiz = 0.06;
+    data->mouse.vertic = 0.06;
     data->window = mlx_new_window(data->mlx, 720, 720, "Cub 3D");
     game_start(data);
-    mlx_hook(data->window, 2, 1L<<0, update_loop, data);
+    mlx_hook(data->window, 2, 1L<<0, key_code, data);
+    //mlx_hook(data->window, 17, 0L, esc_code, data);
+    mlx_hook(data->window, 6, 0L, mouse_move, data);
     mlx_loop(data->mlx);
     return (0);
 }

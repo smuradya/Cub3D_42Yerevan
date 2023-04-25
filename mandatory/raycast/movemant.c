@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/20 20:21:50 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:41:53 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	a_key(t_data *data)
 	data->player.pos.y += invers(data).y * 0.5;
 }
 
-int	update_loop(int k, t_data *data)
+int	key_code(int k, t_data *data)
 {
 	if (k == 13)
 		w_key(data);
@@ -61,53 +61,52 @@ int	update_loop(int k, t_data *data)
 }
 
 void	movemant(int k, t_data *data)
-{
-	(void) data;
-	double time = 0; //time of current frame
-	double oldTime = 0; //time of previous frame
-	//double posX = 22.0, posY = 11.5; //x and y start position
-  	double dirX = -1.0, dirY = 0.0; //initial direction vector
-  	double planeX = 0.0, planeY = 0.66; //the 
-    double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
-    //print(1.0 / frameTime); //FPS counter
-    //redraw();
-
-    //speed modifiers
-    //double moveSpeed = frameTime * 3.0; //the constant value is in squares/second
-    double rotSpeed = frameTime * 2.0; //the constant value is in radians/second
-    //move forward if no wall in front of you
-    // if (w_key == )
-    // {
-    //   if(data->mix_map[int(posX + dirX * moveSpeed)][int(posY)] == 0) posX += dirX * moveSpeed;
-    //   if(data->mix_map[int(posX)][int(posY + dirY * moveSpeed)] == 0) posY += dirY * moveSpeed;
-    // }
-    // //move backwards if no wall behind you
-    // if(keyDown(SDLK_DOWN))
-    // {
-    //   if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
-    //   if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
-    // }
-    //rotate to the right
-	
-    if(k == 123)
+{	
+    if (k == 124)
     {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+		t_vector old_dir = copy_vector(data->player.dir);
+		t_vector old_plane = copy_vector(data->plane);
+		data->player.dir.x = old_dir.x * cos(SENSITIVITY * (-1)) - old_dir.y * sin(SENSITIVITY * (-1));
+    	data->player.dir.y = old_dir.x * sin(SENSITIVITY * (-1)) + old_dir.y * cos(SENSITIVITY * (-1));
+    	data->plane.x = old_plane.x * cos(SENSITIVITY * (-1)) - old_plane.y * sin(SENSITIVITY * (-1));
+  	  data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y * cos(SENSITIVITY * (-1));
     }
-    //rotate to the left
-    if(k == 124)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+    if(k == 123)
+	{
+		t_vector old_dir = copy_vector(data->player.dir);
+		t_vector old_plane = copy_vector(data->plane);
+      data->player.dir.x = old_dir.x * cos(SENSITIVITY) - old_dir.y * sin(SENSITIVITY);
+      data->player.dir.y = old_dir.x * sin(SENSITIVITY) + old_dir.y * cos(SENSITIVITY);
+      data->plane.x = old_plane.x * cos(SENSITIVITY) - old_plane.y * sin(SENSITIVITY);
+      data->plane.y = old_plane.x * sin(SENSITIVITY) + old_plane.y * cos(SENSITIVITY);
     }
   }	
+
+int	mouse_move(int x, int y, t_data *data)
+{	
+	if (data->mouse.horiz != WIN_WIDTH / 2)
+    {
+		if (data->mouse.horiz < x)
+    	{
+			t_vector old_dir = copy_vector(data->player.dir);
+			t_vector old_plane = copy_vector(data->plane);
+			data->player.dir.x = old_dir.x * cos(ROT_MOUSE * (-1)) - old_dir.y * sin(ROT_MOUSE * (-1));
+			data->player.dir.y = old_dir.x * sin(ROT_MOUSE * (-1)) + old_dir.y * cos(ROT_MOUSE * (-1));
+			data->plane.x = old_plane.x * cos(ROT_MOUSE * (-1)) - old_plane.y * sin(ROT_MOUSE * (-1));
+			data->plane.y = old_plane.x * sin(ROT_MOUSE * (-1)) + old_plane.y * cos(ROT_MOUSE * (-1));
+
+   		}
+    	if (data->mouse.horiz > x)
+		{
+			t_vector old_dir = copy_vector(data->player.dir);
+			t_vector old_plane = copy_vector(data->plane);
+    	  	data->player.dir.x = old_dir.x * cos(ROT_MOUSE) - old_dir.y * sin(ROT_MOUSE);
+			data->player.dir.y = old_dir.x * sin(ROT_MOUSE) + old_dir.y * cos(ROT_MOUSE);
+			data->plane.x = old_plane.x * cos(ROT_MOUSE) - old_plane.y * sin(ROT_MOUSE);
+			data->plane.y = old_plane.x * sin(ROT_MOUSE) + old_plane.y * cos(ROT_MOUSE);
+    	}
+  }	
+  	data->mouse.horiz = x;
+	data->mouse.vertic = y;
+	return(1);
+}

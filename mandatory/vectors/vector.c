@@ -6,18 +6,18 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:44:02 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/17 17:30:03 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:34:55 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-t_vector	vector_inverse(t_vector vector)
+t_vector	vector_inverse(t_data *data)
 {
 	t_vector	new_vector;
 
-	new_vector.x = -vector.y;
-	new_vector.y = vector.x;
+	new_vector.x = -data->player.dir.y;
+	new_vector.y = data->player.dir.x;
 	return (new_vector);
 }
 
@@ -60,4 +60,21 @@ t_vector	new_vector(double x, double y)
 	new_vector.x = x;
 	new_vector.y = y;
 	return (new_vector);
+}
+
+t_vector	copy_vector(t_vector source)
+{
+	t_vector	copy;
+	copy.x = source.x;
+	copy.y = source.y;
+	return (copy);
+}
+
+t_mouse	init_mouse(void)
+{
+	t_mouse	tmp_mouse;
+
+	tmp_mouse.horiz = WIN_WIDTH / 2;
+	tmp_mouse.vertic = WIN_HIGHT / 2;
+	return (tmp_mouse);
 }

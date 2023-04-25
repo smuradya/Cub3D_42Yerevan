@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/20 19:20:44 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:31:51 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,22 @@
 
 //vectors
 
-t_vector	vector_inverse(t_vector vector);
+t_vector	vector_inverse(t_data *data);
 double		vector_lenght(t_vector vector);
 t_vector	vector_sum(t_vector first, t_vector second);
 t_vector	vector_diff(t_vector first, t_vector second);
 t_vector	vector_product(t_vector first, t_vector second);
 t_vector	new_vector(double x, double y);
+t_vector	copy_vector(t_vector source);
 
 //raycast
 
-double	camera_x(int x);
+double		camera_x(int x);
 t_vector	ray_vector(t_data	*data, int x);
 void		game_start(t_data *data);
-int	update_loop(int k, t_data *data);
-void	movemant(int k, t_data *data);
-
-
+int			key_code(int k, t_data *data);
+void		movemant(int k, t_data *data);
+int			esc_vcode(t_data *data);
+int			mouse_move(int x, int y, t_data *data);
+t_mouse		init_mouse(void);
 #endif
