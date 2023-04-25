@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/25 20:31:51 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:52:39 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vector	ray_vector(t_data	*data, int x);
 void		game_start(t_data *data);
 int			key_code(int k, t_data *data);
 void		movemant(int k, t_data *data);
-int			esc_vcode(t_data *data);
 int			mouse_move(int x, int y, t_data *data);
+int			esc_code(t_data *data);
 t_mouse		init_mouse(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/25 20:41:53 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:53:00 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	a_key(t_data *data)
 	data->player.pos.y += invers(data).y * 0.5;
 }
 
+int	esc_code(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->window);
+	exit(0);
+	return (0);
+}
+
 int	key_code(int k, t_data *data)
 {
 	if (k == 13)
@@ -52,6 +59,8 @@ int	key_code(int k, t_data *data)
 		s_key(data);
 	else if (k == 0)
 		a_key(data);
+	else if (k == 53)
+		esc_code(data);
 	else if (k == 2)
 		d_key(data);
 	else if (k == 123 || k == 124)

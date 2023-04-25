@@ -1,12 +1,5 @@
 #include "cub3D.h"
 
-int	close_function(t_data *data)
-{
-	mlx_destroy_window(data->mlx, data->window);
-	exit(0);
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
     t_data  *data;
@@ -63,7 +56,7 @@ int main(int argc, char **argv)
     data->window = mlx_new_window(data->mlx, 720, 720, "Cub 3D");
     game_start(data);
     mlx_hook(data->window, 2, 1L<<0, key_code, data);
-    //mlx_hook(data->window, 17, 0L, esc_code, data);
+    mlx_hook(data->window, 17, 0L, esc_code, data);
     mlx_hook(data->window, 6, 0L, mouse_move, data);
     mlx_loop(data->mlx);
     return (0);
