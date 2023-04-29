@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movemant.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/25 20:53:00 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:33:57 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int	mouse_move(int x, int y, t_data *data)
   }	
   	data->mouse.horiz = x;
 	data->mouse.vertic = y;
+	game_start(data);
 	return(1);
 }

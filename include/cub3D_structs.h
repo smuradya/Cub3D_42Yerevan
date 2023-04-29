@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/25 20:19:05 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:50:52 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,26 @@ typedef struct	s_data t_data;
 typedef struct	s_vector t_vector;
 typedef struct	s_draw t_draw;
 typedef struct	s_mouse t_mouse;
+typedef struct s_map	t_map;
+typedef struct s_dir	t_dir;
 
+struct s_map
+{
+	char	**line;
+	int		index;
+	int		fd;
+};
+
+struct s_dir
+{
+	char	**map;
+	char	*east;
+	char	*west;
+	char	*north;
+	char	*south;
+	int		floor;
+	int		ceiling;
+};
 
 struct s_vector
 {
@@ -59,9 +78,9 @@ struct	s_data
 	void		*window;
 	t_player	player;
 	t_vector	plane;
+	t_dir		map_data;
 	int			map_width;
 	int			map_hight;
-	char		**mix_map;
 	t_vector	ray;
 	t_vector	dist;
 	t_vector	delta_dist;

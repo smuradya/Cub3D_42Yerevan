@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:04:16 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/23 19:59:45 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:23:17 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	raycast_algorithm(t_data *data)
 			map_y += data->draw.step_y;
 			data->draw.side = 1;
 		}
-		if (data->mix_map[map_y][map_x] == '1')
+		if (data->map_data.map[map_y][map_x] == '1')
 			hit = 1;
-	}		
+	}
 }
 
 void	start_and_end(t_data *data)

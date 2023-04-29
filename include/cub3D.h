@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/25 20:52:39 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:25:45 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,31 @@ void		movemant(int k, t_data *data);
 int			mouse_move(int x, int y, t_data *data);
 int			esc_code(t_data *data);
 t_mouse		init_mouse(void);
+
+// parsing.c
+
+int parsing(char *argv, t_map *map);
+void	check_validation(t_map	*map);
+void	cub_init(t_dir *dir);
+
+// utils.c
+
+int	ft_strcmp(char *s1, char *s2);
+int	ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
+ 
+ //filll_values.c
+
+ void fill_values(char **line, t_dir *dir, int i);
+ void fill_color(char **line, t_dir *dir, int i);
+ int ft_check(char *str);
+ int check_color(char *str, int i);
+ int check_file(char *line, int i);
+ 
+ //map.c
+ 
+ void	fill_map(char **line, char **map);
+//  char	**fill_map(char **line, char **map);
+ int	space_before(char *str);
+ 
 #endif

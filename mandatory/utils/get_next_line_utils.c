@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: syeghiaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:32:47 by syeghiaz          #+#    #+#             */
-/*   Updated: 2022/08/15 19:15:05 by smuradya         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:16:18 by syeghiaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!str)
 		return (NULL);
 	if (str)
-		ft_strlcpy(str, s + start, total_len);
+		ft_strlcpy(str, s + start, total_len + 1);
 	return (str);
 }
 
