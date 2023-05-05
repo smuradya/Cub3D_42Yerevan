@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/28 20:25:45 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:46:37 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ t_mouse		init_mouse(void);
 
 // parsing.c
 
-int parsing(char *argv, t_map *map);
-void	check_validation(t_map	*map);
-void	cub_init(t_dir *dir);
+int		parsing(char *argv, t_map *map);
+void	check_validation(t_map	*map, t_dir *dir);
+void	cub_init(t_dir *dir, t_data *data);
+void	setup_player(t_data *data, int x, int y);
 
 // utils.c
 

@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/28 19:50:52 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:13:39 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ struct s_dir
 	char	*west;
 	char	*north;
 	char	*south;
+	int		x;
+	int		y;
 	int		floor;
 	int		ceiling;
 };
@@ -76,6 +78,10 @@ struct	s_data
 {
 	void		*mlx;
 	void		*window;
+	void		*img_north;
+	void		*img_south;
+	void		*img_east;
+	void		*img_west;
 	t_player	player;
 	t_vector	plane;
 	t_dir		map_data;

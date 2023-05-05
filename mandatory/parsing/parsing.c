@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/04/29 17:25:55 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:50:24 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 // void setup_player(t_data *data, int x, int y)
 // {
-//  if (data->mix_map[x][y] == 'N')
+//  if (data->map_data.map[x][y] == 'N')
 //   data->player.dir = new_vector(-1, 0.01);
-//  else if (data->mix_map[x][y] == 'E')
+//  else if (data->map_data.map[x][y] == 'E')
 //   data->player.dir = new_vector(0.01, 1);
-//
-
-  else if (data->mix_map[x][y] == 'W')
+//  else if (data->map_data.map[x][y] == 'W')
 //   data->player.dir = new_vector(0.01, -1);
-//  else if (data->mix_map[x][y] == 'S')
+//  else if (data->map_data.map[x][y] == 'S')
 //   data->player.dir = new_vector(1, 0.01);
-//}
+// }
 
-void	cub_init(t_dir *dir)
+void	cub_init(t_dir *dir, t_data *data)
 {
-	t_data  *data;
+	// t_data  *data;
 
-	data = malloc(sizeof(t_data));
+	// data = malloc(sizeof(t_data));
     data->player.pos = new_vector(17, 7);
     data->player.dir = new_vector(-1, 0);
     data->plane = new_vector(0, 0.66);
@@ -111,6 +109,6 @@ int parsing(char *filename, t_map *map)
 	// }
 	// map->line[++i] = "\0";
 	// printf("%d\n", map->index);
-	check_validation(map);
+	// check_validation(map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/04/29 17:01:21 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:32:24 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,28 @@ int		ft_is_pos(char *str)
 	return (error);
 }
 
+void find_position(t_dir *dir)
+{
+	int i;
+	int j;
+
+	i = -1;
+	j = 0;
+	while (dir->map[++i])
+	{
+		j = 0;
+		while (dir->map[i][j])
+		{
+			if (dir->map[i][j] == 'N' || dir->map[i][j] == 'S' ||
+				dir->map[i][j] == 'W' || dir->map[i][j] == 'E')
+			{
+				dir->x = i;
+				dir->y = j;
+			}
+			j++;
+		}
+	}
+}
 void	check_map(char **map, int i, int index)
 {
 	if (map[0])
@@ -148,14 +170,14 @@ void	check_map(char **map, int i, int index)
 	}
 }
 
-void	check_validation(t_map	*map)
+void	check_validation(t_map	*map, t_dir *dir)
 {
 	int i;
-	t_dir *dir;
+	// t_dir *dir;
 	// char **map1 = NULL;
 
-	if (!(dir = malloc (sizeof(t_dir))))
-		return ;
+	// if (!(dir = malloc (sizeof(t_dir))))
+	// 	return ;
 	if ((map->line[1][1] == '1' || map->line[1][1] == '0')
 		&& map->line[map->index][1] != '1')
 	{
@@ -183,7 +205,8 @@ void	check_validation(t_map	*map)
 	while (dir->map[++l])
 	printf("line{%s}\n", dir->map[l]);
 	check_map(dir->map, 0, 0);
-	cub_init(dir);
+	find_position(dir);
+	// cub_init(dir);
 	printf("north = %s\n", dir->north);
 	printf("south = %s\n", dir->south);
 	printf("east = %s\n", dir->east);
