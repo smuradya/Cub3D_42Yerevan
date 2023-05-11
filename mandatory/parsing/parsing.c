@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/04 19:50:24 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:30:30 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int parsing(char *filename, t_map *map)
 		if (ft_strcmp(line, "\n"))
 		{
         	map->line[++i] = line;
-			map->line[i][ft_strlen(line) - 1] = 0; 
+			map->line[i][ft_strlen(line) - 1] = 0;
+			map->index = i;
 		}
         line = get_next_line(map->fd);
     }

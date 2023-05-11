@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/05/04 19:46:37 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:54:39 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	setup_player(t_data *data, int x, int y);
 int	ft_strcmp(char *s1, char *s2);
 int	ft_atoi(const char *str);
 char	**ft_split(char const *s, char c);
+char	*ft_strrchr(const char *s, int c);
  
  //filll_values.c
 

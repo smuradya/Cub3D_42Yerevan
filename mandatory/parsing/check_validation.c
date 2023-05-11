@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/04 19:32:24 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:01:51 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,16 +173,15 @@ void	check_map(char **map, int i, int index)
 void	check_validation(t_map	*map, t_dir *dir)
 {
 	int i;
-	// t_dir *dir;
-	// char **map1 = NULL;
-
-	// if (!(dir = malloc (sizeof(t_dir))))
-	// 	return ;
-	if ((map->line[1][1] == '1' || map->line[1][1] == '0')
-		&& map->line[map->index][1] != '1')
+	if (ft_check(map->line[map->index]) == 1 ||
+		ft_check(map->line[map->index]) == 2 ||
+		ft_check(map->line[map->index]) == 3 ||
+		ft_check(map->line[map->index]) == 4 ||
+		ft_check(map->line[map->index]) == 5 ||
+		ft_check(map->line[map->index]) == 6)
 	{
 		printf("file is incorrect");
-		exit(1);
+		exit(1);	
 	}
 	i = -1;
 	int index = 0;
@@ -190,23 +189,18 @@ void	check_validation(t_map	*map, t_dir *dir)
 	{
 		fill_values(map->line, dir, i);
 		if (map->line[i] != NULL)
-		{
-			// printf("-%s-\n", map->line[i]);
 			++index;
-		}
 	}
-	// printf("%d\n", index);
-	// map1 = (char **)malloc(sizeof(char *));
 	dir->map = malloc(sizeof(char *) * (index + 1));
 	dir->map[index] = 0;
-	// dir->map = fill_map(map->line, map1);
 	fill_map(map->line, dir->map);
-	int l = -1;
-	while (dir->map[++l])
-	printf("line{%s}\n", dir->map[l]);
+	if (dir->east == 0 || dir->west == 0 || dir->south == 0 || dir->north == 0)
+	{
+		printf("file is incorrect");
+		exit(1);
+	}
 	check_map(dir->map, 0, 0);
 	find_position(dir);
-	// cub_init(dir);
 	printf("north = %s\n", dir->north);
 	printf("south = %s\n", dir->south);
 	printf("east = %s\n", dir->east);

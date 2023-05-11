@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/04/27 21:47:15 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:00:10 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,24 +109,29 @@ void fill_color(char **line, t_dir *dir, int i)
 
 	floor = NULL;
 	ceiling = NULL;
-	if (ft_check(line[i]) == 5)
+	if ((ft_check(line[i]) == 5 || ft_check(line[i]) == 6) &&
+			ft_strrchr(line[i], '-') == 0)
 	{
-		floor = line[i];
-		if (check_color(floor, 2) != 1)
-			dir->floor = check_color(line[i], 2);
-		line[i] = NULL;
-	}
-	else if (ft_check(line[i]) == 6)
-	{
-		ceiling = line[i];
-		if (check_color(ceiling, 2) != 1)
-			dir->ceiling = check_color(line[i], 2);
-		line[i] = NULL;
+		if (ft_check(line[i]) == 5)
+		{
+			floor = line[i];
+			if (check_color(floor, 2) != 1)
+				dir->floor = check_color(line[i], 2);
+			line[i] = NULL;
+		}
+		else if (ft_check(line[i]) == 6)
+		{
+			ceiling = line[i];
+			if (check_color(ceiling, 2) != 1)
+				dir->ceiling = check_color(line[i], 2);
+			line[i] = NULL;
+		}
 	}
 	else
 	{
 		write (1, "Color error\n", 12);
-		return ;
+		exit (1);
+		
 	}
 }
 
