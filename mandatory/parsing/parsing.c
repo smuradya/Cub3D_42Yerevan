@@ -24,6 +24,16 @@
 //   data->player.dir = new_vector(1, 0.01);
 // }
 
+void xpm_to_image(t_dir *dir, t_data *data)
+{
+	int w_h[] = {64,64};
+	data->img_east = mlx_xpm_file_to_image(data->mlx, dir->east, &w_h[0], &w_h[1]);	
+	data->img_west = mlx_xpm_file_to_image(data->mlx, dir->west, &w_h[0], &w_h[1]);	
+	data->img_south = mlx_xpm_file_to_image(data->mlx, dir->south, &w_h[0], &w_h[1]);	
+	data->img_north = mlx_xpm_file_to_image(data->mlx, dir->north, &w_h[0], &w_h[1]);	
+}
+
+
 void	cub_init(t_dir *dir, t_data *data)
 {
 	// t_data  *data;
@@ -33,6 +43,9 @@ void	cub_init(t_dir *dir, t_data *data)
     data->player.dir = new_vector(-1, 0);
     data->plane = new_vector(0, 0.66);
     data->map_data.map = dir->map;
+	data->map_data.ceiling = dir->ceiling;
+	data->map_data.floor = dir->floor;
+
 	// int i = -1;
 	// while (data->map_data.map[++i])
 	// 	printf("line[%d] = %s\n", i, data->map_data.map[i]);
@@ -45,7 +58,14 @@ void	cub_init(t_dir *dir, t_data *data)
     //data->mouse.horiz = 0.06;
     //data->mouse.vertic = 0.06;
     data->window = mlx_new_window(data->mlx, 720, 720, "Cub 3D");
+	data->frame = malloc(sizeof(t_img));
+	t_img	*frame = data->frame;
+	frame->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HIGHT);
+	frame->data_addr = mlx_get_data_addr(frame->img,
+		&frame->bits_per_pixel, &frame->size_line, &frame->endian);
+	xpm_to_image(dir, data);
     game_start(data);
+	//printf("BAAAAAARRRREEEEV\n");
     mlx_hook(data->window, 2, 1L<<0, key_code, data);
     mlx_hook(data->window, 17, 0L, esc_code, data);
     mlx_hook(data->window, 6, 0L, mouse_move, data);

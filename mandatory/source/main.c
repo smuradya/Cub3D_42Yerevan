@@ -20,15 +20,6 @@ int arg_validation(int argc, char *argv)
 	return (1);
 }
 
-void xpm_to_image(t_dir *dir, t_data *data)
-{
-	int w_h[] = {64,64};
-	data->img_east = mlx_xpm_file_to_image(data->mlx, dir->east, &w_h[0], &w_h[1]);	
-	data->img_west = mlx_xpm_file_to_image(data->mlx, dir->west, &w_h[0], &w_h[1]);	
-	data->img_south = mlx_xpm_file_to_image(data->mlx, dir->south, &w_h[0], &w_h[1]);	
-	data->img_north = mlx_xpm_file_to_image(data->mlx, dir->north, &w_h[0], &w_h[1]);	
-}
-
 int main(int argc, char **argv)
 {
 	t_map *map;
@@ -45,7 +36,6 @@ int main(int argc, char **argv)
 	check_validation(map, dir);
 	// setup_player(data, dir->x, dir->y);
 	cub_init(dir, data);
-	xpm_to_image(dir, data);
 	return (0);
 }
 

@@ -24,6 +24,7 @@ typedef struct	s_draw t_draw;
 typedef struct	s_mouse t_mouse;
 typedef struct s_map	t_map;
 typedef struct s_dir	t_dir;
+typedef	struct s_img	t_img;
 
 struct s_map
 {
@@ -43,6 +44,17 @@ struct s_dir
 	int		y;
 	int		floor;
 	int		ceiling;
+};
+
+struct	s_img
+{
+	void	*img;
+	int		img_width;
+	int		img_height;
+	int		endian;
+	int		size_line;
+	char	*data_addr;
+	int		bits_per_pixel;
 };
 
 struct s_vector
@@ -94,6 +106,7 @@ struct	s_data
 	int			draw_end;
 	t_mouse		mouse;
 	t_draw		draw;
+	t_img		*frame;
 };
 
 #endif

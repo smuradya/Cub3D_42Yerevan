@@ -22,26 +22,30 @@ t_vector	invers(t_data *data)
 
 void	w_key(t_data *data)
 {
-	data->player.pos.x += data->player.dir.x * 0.5;
-	data->player.pos.y += data->player.dir.y * 0.5;
+//	if (data->map_data.map[(int)(data->player.pos.x + data->player.dir.x * 0.1)][(int)(data->player.pos.y)] == 0)
+		data->player.pos.x += data->player.dir.x * 0.1;
+//	if (data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.1)] == 0)
+		data->player.pos.y += data->player.dir.y * 0.1;
 }
 
 void	s_key(t_data *data)
-{
-	data->player.pos.x -= data->player.dir.x * 0.5;
-	data->player.pos.y -= data->player.dir.y * 0.5;
+{	
+//	if (data->map_data.map[(int)(data->player.pos.x - data->player.dir.x * 0.1)][(int)(data->player.pos.y)] == 0)
+		data->player.pos.x -= data->player.dir.x * 0.1;
+	//if (data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y - data->player.dir.y * 0.1)] == 0)
+		data->player.pos.y -= data->player.dir.y * 0.1;
 }
 
 void	d_key(t_data *data)
 {
-	data->player.pos.x -= invers(data).x * 0.5; 
-	data->player.pos.y -= invers(data).y * 0.5;
+	data->player.pos.x -= invers(data).x * 0.1; 
+	data->player.pos.y -= invers(data).y * 0.1;
 }
 
 void	a_key(t_data *data)
 {
-	data->player.pos.x += invers(data).x * 0.5;
-	data->player.pos.y += invers(data).y * 0.5;
+	data->player.pos.x += invers(data).x * 0.1;
+	data->player.pos.y += invers(data).y * 0.1;
 }
 
 int	esc_code(t_data *data)
@@ -113,10 +117,10 @@ int	mouse_move(int x, int y, t_data *data)
 			data->player.dir.y = old_dir.x * sin(ROT_MOUSE) + old_dir.y * cos(ROT_MOUSE);
 			data->plane.x = old_plane.x * cos(ROT_MOUSE) - old_plane.y * sin(ROT_MOUSE);
 			data->plane.y = old_plane.x * sin(ROT_MOUSE) + old_plane.y * cos(ROT_MOUSE);
-    	}
+		}
   }	
   	data->mouse.horiz = x;
 	data->mouse.vertic = y;
 	game_start(data);
-	return(1);
+	return (1);
 }

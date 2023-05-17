@@ -61,7 +61,7 @@ void	fill_map(char **line, char **map)
 
 int	space_before(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == ' ')

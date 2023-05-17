@@ -109,10 +109,26 @@ void	start_and_end(t_data *data)
 		data->draw_end = WIN_HIGHT - 1;
 }
 
+void	draw_line(t_data *data, int colomn)
+{
+	int	i;
+	int	start;
+	int	end;
+
+	i = -1;
+	start = data->draw_start - 1;
+	end = data->draw_end - 1;
+	while (++i < data->draw_start)
+		*((unsigned int *)data->frame->data_addr + (i * WIN_WIDTH + colomn)) = data->map_data.ceiling;
+	while (++start < data->draw_end)
+		*((unsigned int *)data->frame->data_addr + (start * WIN_WIDTH + colomn)) = 0x00ff00;
+	while (++end < WIN_HIGHT)
+		*((unsigned int *)data->frame->data_addr + (end * WIN_WIDTH + colomn)) = data->map_data.floor;
+}
+
 void	game_start(t_data *data)
 {
 	int	x;
-	int	i, start, end;
 
 	x = 0;
 	while (x < WIN_WIDTH)
@@ -123,16 +139,9 @@ void	game_start(t_data *data)
 		checking_rays(data);
 		raycast_algorithm(data);
 		start_and_end(data);
-		i = -1;
-		start = data->draw_start - 1;
-		end = data->draw_end - 1;
-		while (++i < data->draw_start)
-			mlx_pixel_put(data->mlx, data->window, x, i, 0x499033 * 100 / 40);
-		while (++start < data->draw_end)
-			mlx_pixel_put(data->mlx, data->window, x, start, 0x9774e7 * 100 / 50 - 10);
-		while (++end < WIN_HIGHT)
-			mlx_pixel_put(data->mlx, data->window, x, end, 0xf99983d + 100);
+		draw_line(data, x);
 		x++;
 	}
+	mlx_put_image_to_window(data->mlx, data->window,
+		data->frame[0].img, 0, 0);
 }
-
