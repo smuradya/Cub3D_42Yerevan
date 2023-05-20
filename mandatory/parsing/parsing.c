@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/08 14:30:30 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:48:40 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	cub_init(t_dir *dir, t_data *data)
 	// data = malloc(sizeof(t_data));
     data->player.pos = new_vector(17, 7);
     data->player.dir = new_vector(-1, 0);
-    data->plane = new_vector(0, 0.66);
+    data->plane = new_vector(0, -0.66);
     data->map_data.map = dir->map;
 	data->map_data.ceiling = dir->ceiling;
 	data->map_data.floor = dir->floor;

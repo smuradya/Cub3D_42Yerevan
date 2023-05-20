@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:04:16 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/29 17:23:17 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:57:16 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	start_and_end(t_data *data)
 	if (data->draw_start < 0)
 		data->draw_start = 0;
 	data->draw_end = line_height / 2 + WIN_HIGHT / 2;
-	if (data->draw_end >= WIN_HIGHT)
+	if (data->draw_end >= WIN_HIGHT || data->draw_end < 0)
 		data->draw_end = WIN_HIGHT - 1;
 }
 

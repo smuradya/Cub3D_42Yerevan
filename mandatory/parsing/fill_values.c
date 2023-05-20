@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/08 14:00:10 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/20 15:32:44 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int check_color(char *str, int i)
 			if(str[i] && str[i] == ',')
 			{
 				i++;
-				if (ft_atoi(str + i) > 0 && ft_atoi(str + i) <= 255)
+				if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
 				{
 					rgb1 = ft_atoi(str + i);
 					while (str[i] && str[i] >= '0' && str[i] <= '9')
@@ -60,7 +60,7 @@ int check_color(char *str, int i)
 					if(str[i] && str[i] == ',')
 					{
 						i++;
-						if (ft_atoi(str + i) > 0 && ft_atoi(str + i) <= 255)
+						if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
 						{
 							rgb2 = ft_atoi(str + i);
 							while (str[i] && str[i] >= '0' && str[i] <= '9')

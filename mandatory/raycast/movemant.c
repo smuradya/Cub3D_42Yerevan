@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movemant.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/26 18:33:57 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:41:26 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,37 @@ t_vector	invers(t_data *data)
 
 void	w_key(t_data *data)
 {
-//	if (data->map_data.map[(int)(data->player.pos.x + data->player.dir.x * 0.1)][(int)(data->player.pos.y)] == 0)
-		data->player.pos.x += data->player.dir.x * 0.1;
-//	if (data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.1)] == 0)
-		data->player.pos.y += data->player.dir.y * 0.1;
+	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x + data->player.dir.x * 0.2)] != '1')
+		data->player.pos.x += data->player.dir.x * 0.2;
+	if (data->map_data.map[(int)(data->player.pos.y + data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+		data->player.pos.y += data->player.dir.y * 0.2;
+	// printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
 }
 
 void	s_key(t_data *data)
-{	
-//	if (data->map_data.map[(int)(data->player.pos.x - data->player.dir.x * 0.1)][(int)(data->player.pos.y)] == 0)
-		data->player.pos.x -= data->player.dir.x * 0.1;
-	//if (data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y - data->player.dir.y * 0.1)] == 0)
-		data->player.pos.y -= data->player.dir.y * 0.1;
+{
+	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x - data->player.dir.x * 0.2)] != '1')
+		data->player.pos.x -= data->player.dir.x * 0.2;
+	if (data->map_data.map[(int)(data->player.pos.y - data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+		data->player.pos.y -= data->player.dir.y * 0.2;
 }
 
 void	d_key(t_data *data)
 {
-	data->player.pos.x -= invers(data).x * 0.1; 
-	data->player.pos.y -= invers(data).y * 0.1;
+	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x + data->player.dir.x * 0.2)] != '1')
+	data->player.pos.x += invers(data).x * 0.2; 
+	if (data->map_data.map[(int)(data->player.pos.y + data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+	data->player.pos.y += invers(data).y * 0.2;
+	printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
+
 }
 
 void	a_key(t_data *data)
 {
-	data->player.pos.x += invers(data).x * 0.1;
-	data->player.pos.y += invers(data).y * 0.1;
+	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x - data->player.dir.x * 0.2)] != '1')
+	data->player.pos.x -= invers(data).x * 0.2;
+	if (data->map_data.map[(int)(data->player.pos.y - data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+	data->player.pos.y -= invers(data).y * 0.2;
 }
 
 int	esc_code(t_data *data)
@@ -75,7 +82,7 @@ int	key_code(int k, t_data *data)
 
 void	movemant(int k, t_data *data)
 {	
-    if (k == 124)
+    if (k == 123)
     {
 		t_vector old_dir = copy_vector(data->player.dir);
 		t_vector old_plane = copy_vector(data->plane);
@@ -84,7 +91,7 @@ void	movemant(int k, t_data *data)
     	data->plane.x = old_plane.x * cos(SENSITIVITY * (-1)) - old_plane.y * sin(SENSITIVITY * (-1));
   	  data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y * cos(SENSITIVITY * (-1));
     }
-    if(k == 123)
+    if(k == 124)
 	{
 		t_vector old_dir = copy_vector(data->player.dir);
 		t_vector old_plane = copy_vector(data->plane);

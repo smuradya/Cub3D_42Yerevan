@@ -4,7 +4,7 @@ OBJS = $(SRCS:.c=.o)
 INCLUDES = include
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
