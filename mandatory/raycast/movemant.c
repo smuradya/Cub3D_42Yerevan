@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/05/20 17:41:26 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:00:45 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,39 @@ t_vector	invers(t_data *data)
 
 void	w_key(t_data *data)
 {
-	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x + data->player.dir.x * 0.2)] != '1')
+	if(data->map_data.map[(int)(data->player.pos.x + data->player.dir.x * 0.2)][(int)(data->player.pos.y)] != '1')
 		data->player.pos.x += data->player.dir.x * 0.2;
-	if (data->map_data.map[(int)(data->player.pos.y + data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.2)] != '1')	
 		data->player.pos.y += data->player.dir.y * 0.2;
-	// printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
+	//printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
 }
 
 void	s_key(t_data *data)
 {
-	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x - data->player.dir.x * 0.2)] != '1')
+	if(data->map_data.map[(int)(data->player.pos.x - data->player.dir.x * 0.2)][(int)(data->player.pos.y)] != '1')
 		data->player.pos.x -= data->player.dir.x * 0.2;
-	if (data->map_data.map[(int)(data->player.pos.y - data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
+	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y - data->player.dir.y * 0.2)] != '1')	
 		data->player.pos.y -= data->player.dir.y * 0.2;
 }
 
 void	d_key(t_data *data)
 {
-	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x + data->player.dir.x * 0.2)] != '1')
-	data->player.pos.x += invers(data).x * 0.2; 
-	if (data->map_data.map[(int)(data->player.pos.y + data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
-	data->player.pos.y += invers(data).y * 0.2;
-	printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
+	if(data->map_data.map[(int)(data->player.pos.x + data->player.dir.x * 0.2)][(int)(data->player.pos.y)] != '1')
+		data->player.pos.x += data->player.dir.x * 0.2;
+	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.2)] != '1')	
+		data->player.pos.y += data->player.dir.y * 0.2;
+	// printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
 
 }
 
 void	a_key(t_data *data)
 {
-	if (data->map_data.map[(int)(data->player.pos.y)][(int)(data->player.pos.x - data->player.dir.x * 0.2)] != '1')
-	data->player.pos.x -= invers(data).x * 0.2;
-	if (data->map_data.map[(int)(data->player.pos.y - data->player.dir.y * 0.2)][(int)(data->player.pos.x)] != '1')
-	data->player.pos.y -= invers(data).y * 0.2;
+	if(data->map_data.map[(int)(data->player.pos.x - data->player.dir.x * 0.2)][(int)(data->player.pos.y)] != '1')
+		data->player.pos.x -= data->player.dir.x * 0.2;
+	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y - data->player.dir.y * 0.2)] != '1')	
+		data->player.pos.y -= data->player.dir.y * 0.2;
+	//printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
+
 }
 
 int	esc_code(t_data *data)

@@ -79,27 +79,35 @@ int check_color(char *str, int i)
 	return (1);
 }
 
-int ft_check(char *str)
+int	ft_check(char *str)
 {
-		int i;
+	char	**splitted;
+	int		i;
+	int		value;
 
-	i = 0;
-	if (str && str[i])
-	{
-		if (str[i] == 'N' && str[i + 1] == 'O')
-			return (1);
-		else if (str[i] == 'S' && str[i + 1] == 'O')
-			return (2);
-		else if (str[i] == 'W' && str[i + 1] == 'E')
-			return (3);
-		else if (str[i] == 'E' && str[i + 1] == 'A')
-			return (4);
-		else if (str[i] == 'F' && str[i + 1] == ' ')
-			return (5);
-		else if (str[i] == 'C' && str[i + 1] == ' ')
-			return (6);
-	}
-	return (0);
+	splitted = ft_split(str, ' ');
+	i = -1;
+	while (splitted[++i])
+		;
+	if (i != 2)
+		return (0);
+	if (!ft_strcmp(splitted[0], "NO"))
+		value = 1;
+	else if (!ft_strcmp(splitted[0], "SO"))
+		value = 2;
+	else if (!ft_strcmp(splitted[0], "WE"))
+		value = 3;
+	else if (!ft_strcmp(splitted[0], "EA"))
+		value = 4;
+	else if (!ft_strcmp(splitted[0], "F"))
+		value = 5;
+	else if (!ft_strcmp(splitted[0], "C"))
+		value = 6;
+	i = -1;
+	while (splitted[++i])
+		free(splitted[i]);
+	free(splitted);
+	return (value);
 }
 
 void fill_color(char **line, t_dir *dir, int i)
@@ -131,38 +139,35 @@ void fill_color(char **line, t_dir *dir, int i)
 	{
 		write (1, "Color error\n", 12);
 		exit (1);
-		
 	}
 }
 
-void fill_values(char **line, t_dir *dir, int i)
+int	fill_values(char **line, t_dir *dir, int i)
 {
-	if (ft_check(line[i]) == 1)
+	int	check_value;
+
+	check_value = ft_check(line[i]);
+	if (check_value == 1)
 	{
 		if (check_file(line[i], 3) == 0)
 			dir->north = ft_strdup(line[i] + 3);
-		line[i] = NULL;
 	}
-	else if (ft_check(line[i]) == 2)
+	else if (check_value == 2)
 	{
 		if (check_file(line[i], 3) == 0)
 			dir->south = ft_strdup(line[i] + 3);
-		line[i] = NULL;
 	}
-	else if (ft_check(line[i]) == 3)
+	else if (check_value == 3)
 	{
 		if (check_file(line[i], 3) == 0)
 			dir->west = ft_strdup(line[i] + 3);
-		line[i] = NULL;
 	}
-	else if (ft_check(line[i]) == 4)
+	else if (check_value == 4)
 	{
 		if (check_file(line[i], 3) == 0)
 			dir->east = ft_strdup(line[i] + 3);
-		line[i] = NULL;
 	}
-	else if (ft_check(line[i]) == 5 || ft_check(line[i]) == 6)
+	else if (check_value == 5 || check_value == 6)
 		fill_color(line, dir, i);
-	// else if (line[i][1] == '1' || line[i][1] == '0')
-	// 	map_parse(line, dir, i);
+	return (check_value != 0);
 }

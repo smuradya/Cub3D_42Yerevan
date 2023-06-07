@@ -63,7 +63,7 @@ char	*ft_strrchr(const char *s, int c);
  
  //filll_values.c
 
- void fill_values(char **line, t_dir *dir, int i);
+ int fill_values(char **line, t_dir *dir, int i);
  void fill_color(char **line, t_dir *dir, int i);
  int ft_check(char *str);
  int check_color(char *str, int i);

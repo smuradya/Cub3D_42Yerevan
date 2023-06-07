@@ -75,7 +75,7 @@ int			ft_wall_around(char *str)
 	return (0);
 }
 
-int			ft_other_char(char *str)
+int	ft_other_char(char *str)
 {
 	int i;
 
@@ -94,17 +94,17 @@ int			ft_other_char(char *str)
 int		ft_is_pos(char *str)
 {
 	int i;
-	int error;
+	int count;
 
 	i = 0;
-	error = 0;
-	while (str && str[i])
+	count = 0;
+	while (str[i])
 	{
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
-			error++;
+			++count;
 		i++;
 	}
-	return (error);
+	return (count);
 }
 
 void find_position(t_dir *dir)
@@ -129,82 +129,151 @@ void find_position(t_dir *dir)
 		}
 	}
 }
-void	check_map(char **map, int i, int index)
+// void	check_map(char **map, int i, int index)
+// {
+// 	if (map[0])
+// 	{
+// 		while (map && map[i] && space_before(map[i]) == 0)
+// 		{
+// 			// if (i == 0 && (ft_map_wall(map[i]) == 1 || ft_wall_around(map[i]) == 1))
+// 			// {
+// 			// 	printf("Wall error\n");
+// 			// 	exit (1);
+// 			// }
+// 			// if (map[i + 1] == 0)
+// 			// {
+// 			// 	if (ft_map_wall(map[i]) == 1)
+// 			// 	{
+// 			// 		printf("Wall error 1\n");
+// 			// 		exit (1);
+// 			// 	}
+// 			// }
+// 			// if (i > 0 && map[i + 1] != 0 && ft_around(map[i - 1], map[i], map[i + 1]) == 1)
+// 			// {
+// 			// 	printf("Map error\n");
+// 			// 	exit (1);	
+// 			// }
+// 			if (ft_other_char(map[i]) == 1)
+// 			{
+// 				printf("Wrong char in the map error\n");
+// 				exit (1);
+// 			}
+// 			index = index + ft_is_pos(map[i]);
+// 			i++;
+// 		}
+// 	}
+// 	if (index != 1)
+// 	{
+// 		printf("Possition error %d\n", index);
+// 		exit (1);
+// 	}
+// }
+void	check_map(char **map)
 {
-	if (map[0])
+	int	i;
+	int index;
+
+	i = -1;
+	index = 0;
+	while (map[++i])
 	{
-		while (map && map[i] && space_before(map[i]) == 0)
+		index += index + ft_is_pos(map[i]);
+		if (ft_other_char(map[i]) == 1)
 		{
-			if (i == 0 && (ft_map_wall(map[i]) == 1 || ft_wall_around(map[i]) == 1))
-			{
-				printf("Wall error\n");
-				exit (1);
-			}
-			if (map[i + 1] == 0)
-			{
-				if (ft_map_wall(map[i]) == 1)
-				{
-					printf("Wall error 1\n");
-					exit (1);
-				}
-			}
-			if (i > 0 && map[i + 1] != 0 && ft_around(map[i - 1], map[i], map[i + 1]) == 1)
-			{
-				printf("Map error\n");
-				exit (1);	
-			}
-			if (ft_other_char(map[i]) == 1)
-			{
-				printf("Wrong char in the map error\n");
-				exit (1);
-			}
-			if (ft_is_pos(map[i]) > 0)
-				index = index + ft_is_pos(map[i]);
-			i++;
+			printf("Wrong char in the map error\n");
+			exit (1);
 		}
 	}
-	if (index > 1 || index == 0)
+	if (index != 1)
 	{
-		printf("Possition error\n");
+		printf("Possition error %d\n", index);
 		exit (1);
+	}
+}
+void	ft_val_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if ((map[i][j] == '0' || map[i][j] == 'N'
+				|| map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == 'S') && (map[i][j + 1] == '\n' 
+				|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
+				|| map[i][j + 1] == '\t'))
+			{
+				printf ("MAP ERROR\n");
+				exit (1);
+			}
+			if ((map[i][j] == '0' || map[i][j] == 'N'
+				|| map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == 'S') && (map[i][j - 1] == '\n' 
+				|| map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
+				|| map[i][j - 1] == '\t'))
+			{
+				printf ("MAP ERROR\n");
+				exit (1);
+			}
+			if ((map[i][j] == '0' || map[i][j] == 'N'
+				|| map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == 'S') && (map[i + 1][j] == '\n' 
+				|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0'
+				|| map[i + 1][j] == '\t'))
+			{
+				printf ("MAP ERROR\n");
+				exit (1);
+			}
+			if ((map[i][j] == '0' || map[i][j] == 'N'
+				|| map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == 'S') && (map[i - 1][j] == '\n' 
+				|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
+				|| map[i - 1][j] == '\t'))
+			{
+				printf ("MAP ERROR\n");
+				exit (1);
+			}
+		}
 	}
 }
 
 void	check_validation(t_map	*map, t_dir *dir)
 {
 	int i;
-	if (ft_check(map->line[map->index]) == 1 ||
-		ft_check(map->line[map->index]) == 2 ||
-		ft_check(map->line[map->index]) == 3 ||
-		ft_check(map->line[map->index]) == 4 ||
-		ft_check(map->line[map->index]) == 5 ||
-		ft_check(map->line[map->index]) == 6)
+	int last_row_check;
+
+	last_row_check = ft_check(map->line[map->index]);
+	if (last_row_check >= 1 && last_row_check <= 6)
 	{
 		printf("file is incorrect");
 		exit(1);	
 	}
 	i = -1;
-	int index = 0;
-	while(map->line[++i])
+	while (map->line[++i])
 	{
-		fill_values(map->line, dir, i);
-		if (map->line[i] != NULL)
-			++index;
+		if (!map->line[i][0])
+			continue ;
+		if (!fill_values(map->line, dir, i))
+			break ;
 	}
-	dir->map = malloc(sizeof(char *) * (index + 1));
-	dir->map[index] = 0;
-	fill_map(map->line, dir->map);
+	int map_size = map->index - i + 1;
+	printf("i = %d\n", map_size);
+	dir->map = malloc(sizeof(char *) * (map_size + 1));
+	dir->map[map_size] = 0;
+	fill_map(map->line + i, dir->map);
 	if (dir->east == 0 || dir->west == 0 || dir->south == 0 || dir->north == 0)
 	{
 		printf("file is incorrect");
 		exit(1);
 	}
-	check_map(dir->map, 0, 0);
+	i = -1;
+	while (dir->map[++i])
+		printf("%s\n", dir->map[i]);
+	ft_val_map(dir->map);
+	// check_map(dir->map, 0, 0);
 	find_position(dir);
-	printf("north = %s\n", dir->north);
-	printf("south = %s\n", dir->south);
-	printf("east = %s\n", dir->east);
-	printf("west = %s\n", dir->west);
-	printf("floor = %d\n", dir->floor);
-	printf("ceiling = %d\n", dir->ceiling);
 }

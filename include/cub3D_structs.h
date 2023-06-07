@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/05/05 15:44:52 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:05:09 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_STRUCTES_H
 # define CUB3D_STRUCTES_H
 # define WIN_WIDTH 980
-# define WIN_HIGHT 980
+# define WIN_HEIGHT 980
 # define SENSITIVITY 0.05
 # define ROT_MOUSE 0.06
+# define TEXT_WIDTH            64
+# define TEXT_HIGHT            64
 
-typedef struct	s_player t_player;
-typedef struct	s_data t_data;
-typedef struct	s_vector t_vector;
-typedef struct	s_draw t_draw;
-typedef struct	s_mouse t_mouse;
-typedef struct s_map	t_map;
-typedef struct s_dir	t_dir;
-typedef	struct s_img	t_img;
+typedef struct	s_player 	t_player;
+typedef struct	s_data 		t_data;
+typedef struct	s_vector 	t_vector;
+typedef struct	s_draw 		t_draw;
+typedef struct	s_mouse 	t_mouse;
+typedef struct	s_map		t_map;
+typedef struct	s_dir		t_dir;
+typedef	struct	s_img		t_img;
+typedef struct	s_textures	t_textures;
 
 struct s_map
 {
@@ -55,6 +58,7 @@ struct	s_img
 	int		size_line;
 	char	*data_addr;
 	int		bits_per_pixel;
+	unsigned int	*texture;
 };
 
 struct s_vector
@@ -83,17 +87,27 @@ struct s_draw
 	double	step_x;
 	double	step_y;
 	double	side;
+	double	tex_pos;
+	double	ratio;
+	int		tex_x;
+	int		line_height;
+};
+
+struct s_textures
+{
+	t_img	north;
+	t_img	east;
+	t_img	west;
+	t_img	south;
 };
 
 
 struct	s_data
 {
 	void		*mlx;
+	char		**sdl;
 	void		*window;
-	void		*img_north;
-	void		*img_south;
-	void		*img_east;
-	void		*img_west;
+	t_textures	*textures;
 	t_player	player;
 	t_vector	plane;
 	t_dir		map_data;

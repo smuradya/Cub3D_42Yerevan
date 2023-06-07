@@ -87,26 +87,56 @@ void	raycast_algorithm(t_data *data)
 			map_y += data->draw.step_y;
 			data->draw.side = 1;
 		}
-		if (data->map_data.map[map_y][map_x] == '1')
+		if (data->map_data.map[map_x][map_y] == '1')
 			hit = 1;
 	}
 }
 
 void	start_and_end(t_data *data)
 {
-	int	line_height;
 
 	if (data->draw.side == 0)
 		data->player.wall_dis = (data->dist.x - data->delta_dist.x);
 	else
 		data->player.wall_dis = (data->dist.y - data->delta_dist.y);
-	line_height = (int)(WIN_HIGHT / data->player.wall_dis);
-	data->draw_start = -line_height / 2 + WIN_HIGHT / 2;
+	data->draw.line_height = (int)(WIN_HEIGHT / data->player.wall_dis);
+	data->draw_start = -data->draw.line_height / 2 + WIN_HEIGHT / 2;
 	if (data->draw_start < 0)
 		data->draw_start = 0;
-	data->draw_end = line_height / 2 + WIN_HIGHT / 2;
-	if (data->draw_end >= WIN_HIGHT || data->draw_end < 0)
-		data->draw_end = WIN_HIGHT - 1;
+	data->draw_end = data->draw.line_height / 2 + WIN_HEIGHT / 2;
+	if (data->draw_end >= WIN_HEIGHT || data->draw_end < 0)
+		data->draw_end = WIN_HEIGHT - 1;
+}
+
+
+unsigned int	get_texture_color(t_data *data)
+{
+    int		tex_y;
+    int		color;
+	t_img	img;
+
+    color = 0;
+    data->draw.tex_pos += data->draw.ratio;
+    tex_y = (int)data->draw.tex_pos & (TEXT_HIGHT - 1);
+	if (data->draw.side == 0 && data->ray.x > 0)
+       img = data->textures->south;
+    else if (data->draw.side == 0 && data->ray.x < 0)
+       img = data->textures->north;
+    else if (data->draw.side == 1 && data->ray.y < 0)
+       img = data->textures->west;
+    else if (data->draw.side == 1 && data->ray.y > 0)
+       img = data->textures->east;
+
+	color = *(unsigned int *)(img.data_addr + (tex_y * img.bits_per_pixel / 8) + img.size_line * data->draw.tex_x);
+    // if (data->draw.side == 0 && data->ray.x > 0)
+    //     color = data->textures->south.texture[tex_y + 64 * data->draw.tex_x];
+    // else if (data->draw.side == 0 && data->ray.x < 0)
+    //     color = data->textures->north.texture[tex_y + 64 * data->draw.tex_x];
+    // else if (data->draw.side == 1 && data->ray.y < 0)
+    //     color = data->textures->west.texture[tex_y + 64 * data->draw.tex_x];
+    // else if (data->draw.side == 1 && data->ray.y > 0)
+    //     color = data->textures->east.texture[tex_y + 64 * data->draw.tex_x];
+    return (color);
 }
 
 void	draw_line(t_data *data, int colomn)
@@ -121,10 +151,47 @@ void	draw_line(t_data *data, int colomn)
 	while (++i < data->draw_start)
 		*((unsigned int *)data->frame->data_addr + (i * WIN_WIDTH + colomn)) = data->map_data.ceiling;
 	while (++start < data->draw_end)
-		*((unsigned int *)data->frame->data_addr + (start * WIN_WIDTH + colomn)) = 0x00ff00;
-	while (++end < WIN_HIGHT)
+		*(unsigned int *)(data->frame->data_addr + (start * data->frame->size_line
+			+ colomn * (data->frame->bits_per_pixel / 8))) = get_texture_color(data);
+		// *((unsigned int *)data->frame->data_addr + (start * WIN_WIDTH + colomn)) = get_texture_color(data);
+	while (++end < WIN_HEIGHT)
 		*((unsigned int *)data->frame->data_addr + (end * WIN_WIDTH + colomn)) = data->map_data.floor;
 }
+
+double    init_tex_pos(t_draw draw)
+{
+    if ((-draw.line_height / 2) < 0)
+        return ((0 - WIN_HEIGHT / 2 + draw.line_height / 2) * draw.ratio);
+    else
+        return ((-draw.line_height / 2 - WIN_HEIGHT / 2
+                + draw.line_height / 2) * draw.ratio);
+}
+
+double    wall_x(t_data *data, t_draw draw)
+{
+    double    wallx;
+
+    if (draw.side == 0)
+        wallx = data->player.pos.y + data->player.wall_dis * data->ray.y;
+    else
+        wallx = data->player.pos.x + data->player.wall_dis * data->ray.x;
+    wallx -= floor((wallx));
+    return (wallx);
+}
+
+int    init_tex_x(t_data *data, t_draw draw)
+{
+    int    tex_x;
+
+    tex_x = (int)(wall_x(data, draw) * (double)TEXT_WIDTH);
+    if (draw.side == 0 && data->ray.x > 0)
+        tex_x = TEXT_WIDTH - tex_x - 1;
+    if (draw.side == 1 && data->ray.y < 0)
+        tex_x = TEXT_WIDTH - tex_x - 1;
+    return (tex_x);
+}
+
+
 
 void	game_start(t_data *data)
 {
@@ -139,6 +206,10 @@ void	game_start(t_data *data)
 		checking_rays(data);
 		raycast_algorithm(data);
 		start_and_end(data);
+
+		data->draw.tex_x = init_tex_x(data, data->draw);
+		data->draw.ratio = 1.0 * TEXT_HIGHT / data->draw.line_height;
+		data->draw.tex_pos = init_tex_pos(data->draw);
 		draw_line(data, x);
 		x++;
 	}

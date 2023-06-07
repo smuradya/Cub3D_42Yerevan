@@ -36,27 +36,46 @@
 // 	return(map);
 // }
 
+int	get_maxlen(char **line)
+{
+	int	i;
+	int	max_len;
+	int	line_len;
+
+	i = -1;
+	max_len = ft_strlen(line[0]);
+	while (line[++i])
+	{
+		line_len = ft_strlen(line[i]);
+		if (line_len > max_len)
+			max_len = line_len;
+	}
+	return (max_len);
+}
+
 void	fill_map(char **line, char **map)
 {
 	int	i;
-	int	j;
+	int	k;
+	int	max_len;
+	int	line_len;
 
 	i = -1;
-	j = -1;
-	while (line[++i] == NULL)
-		;
-	i--;
-	while(line[++i])
+	max_len = get_maxlen(line);
+	while (line[++i])
 	{
-		map[++j] = line[i];
-		line[i] = NULL;
-		// printf("map -%s-\n", map[j]);
+		map[i] = malloc(max_len + 1);
+		map[i][max_len] = 0;
+		k = -1;
+		line_len = ft_strlen(line[i]);
+		while (++k < max_len)
+		{
+			if (k < line_len)
+				map[i][k] = line[i][k];
+			else
+				map[i][k] = ' ';
+		}
 	}
-	// j = 0;
-	// while (map[j++])
-	// 	printf("map = %s\n", map[j]);
-		// printf("map = %s\n", map[j]);
-	// return(map);
 }
 
 int	space_before(char *str)

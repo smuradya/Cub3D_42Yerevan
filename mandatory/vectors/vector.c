@@ -75,6 +75,6 @@ t_mouse	init_mouse(void)
 	t_mouse	tmp_mouse;
 
 	tmp_mouse.horiz = WIN_WIDTH / 2;
-	tmp_mouse.vertic = WIN_HIGHT / 2;
+	tmp_mouse.vertic = WIN_HEIGHT / 2;
 	return (tmp_mouse);
 }
