@@ -12,12 +12,12 @@
 
 #include "../include/cub3D.h"
 
-t_vector	vector_inverse(t_data *data)
+t_vector	vector_inverse(t_vector vector)
 {
 	t_vector	new_vector;
 
-	new_vector.x = -data->player.dir.y;
-	new_vector.y = data->player.dir.x;
+	new_vector.x = vector.y;
+	new_vector.y = -vector.x;
 	return (new_vector);
 }
 
@@ -65,6 +65,7 @@ t_vector	new_vector(double x, double y)
 t_vector	copy_vector(t_vector source)
 {
 	t_vector	copy;
+
 	copy.x = source.x;
 	copy.y = source.y;
 	return (copy);

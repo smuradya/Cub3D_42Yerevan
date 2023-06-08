@@ -26,7 +26,6 @@ void	w_key(t_data *data)
 		data->player.pos.x += data->player.dir.x * 0.2;
 	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.2)] != '1')	
 		data->player.pos.y += data->player.dir.y * 0.2;
-	//printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
 }
 
 void	s_key(t_data *data)
@@ -43,8 +42,6 @@ void	d_key(t_data *data)
 		data->player.pos.x += data->player.dir.x * 0.2;
 	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y + data->player.dir.y * 0.2)] != '1')	
 		data->player.pos.y += data->player.dir.y * 0.2;
-	// printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
-
 }
 
 void	a_key(t_data *data)
@@ -53,8 +50,6 @@ void	a_key(t_data *data)
 		data->player.pos.x -= data->player.dir.x * 0.2;
 	if(data->map_data.map[(int)(data->player.pos.x)][(int)(data->player.pos.y - data->player.dir.y * 0.2)] != '1')	
 		data->player.pos.y -= data->player.dir.y * 0.2;
-	//printf("x: %f, y: %f, dir.x: %f, dir.y: %f\n", data->player.pos.x, data->player.pos.y, data->player.dir.x, data->player.dir.y);
-
 }
 
 int	esc_code(t_data *data)
@@ -84,23 +79,23 @@ int	key_code(int k, t_data *data)
 
 void	movemant(int k, t_data *data)
 {	
-    if (k == 123)
+    if (k == 124)
     {
 		t_vector old_dir = copy_vector(data->player.dir);
 		t_vector old_plane = copy_vector(data->plane);
 		data->player.dir.x = old_dir.x * cos(SENSITIVITY * (-1)) - old_dir.y * sin(SENSITIVITY * (-1));
     	data->player.dir.y = old_dir.x * sin(SENSITIVITY * (-1)) + old_dir.y * cos(SENSITIVITY * (-1));
     	data->plane.x = old_plane.x * cos(SENSITIVITY * (-1)) - old_plane.y * sin(SENSITIVITY * (-1));
-  	  data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y * cos(SENSITIVITY * (-1));
+		data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y * cos(SENSITIVITY * (-1));
     }
-    if(k == 124)
+    if(k == 123)
 	{
 		t_vector old_dir = copy_vector(data->player.dir);
 		t_vector old_plane = copy_vector(data->plane);
-      data->player.dir.x = old_dir.x * cos(SENSITIVITY) - old_dir.y * sin(SENSITIVITY);
-      data->player.dir.y = old_dir.x * sin(SENSITIVITY) + old_dir.y * cos(SENSITIVITY);
-      data->plane.x = old_plane.x * cos(SENSITIVITY) - old_plane.y * sin(SENSITIVITY);
-      data->plane.y = old_plane.x * sin(SENSITIVITY) + old_plane.y * cos(SENSITIVITY);
+		data->player.dir.x = old_dir.x * cos(SENSITIVITY) - old_dir.y * sin(SENSITIVITY);
+		data->player.dir.y = old_dir.x * sin(SENSITIVITY) + old_dir.y * cos(SENSITIVITY);
+		data->plane.x = old_plane.x * cos(SENSITIVITY) - old_plane.y * sin(SENSITIVITY);
+		data->plane.y = old_plane.x * sin(SENSITIVITY) + old_plane.y * cos(SENSITIVITY);
     }
   }	
 

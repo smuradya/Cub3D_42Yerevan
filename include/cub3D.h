@@ -28,7 +28,7 @@
 
 //vectors
 
-t_vector	vector_inverse(t_data *data);
+t_vector	vector_inverse(t_vector vector);
 double		vector_lenght(t_vector vector);
 t_vector	vector_sum(t_vector first, t_vector second);
 t_vector	vector_diff(t_vector first, t_vector second);
@@ -49,30 +49,30 @@ t_mouse		init_mouse(void);
 
 // parsing.c
 
-int		parsing(char *argv, t_map *map);
-void	check_validation(t_map	*map, t_dir *dir);
-void	cub_init(t_dir *dir, t_data *data);
-void	setup_player(t_data *data, int x, int y);
+int			parsing(char *argv, t_map *map);
+void		check_validation(t_map	*map, t_dir *dir);
+void		cub_init(t_dir *dir, t_data *data);
+void		setup_player(t_data *data, t_dir *dir);
 
 // utils.c
 
-int	ft_strcmp(char *s1, char *s2);
-int	ft_atoi(const char *str);
-char	**ft_split(char const *s, char c);
-char	*ft_strrchr(const char *s, int c);
- 
- //filll_values.c
+int			ft_strcmp(char *s1, char *s2);
+int			ft_atoi(const char *str);
+char		**ft_split(char const *s, char c);
+char		*ft_strrchr(const char *s, int c);
 
- int fill_values(char **line, t_dir *dir, int i);
- void fill_color(char **line, t_dir *dir, int i);
- int ft_check(char *str);
- int check_color(char *str, int i);
- int check_file(char *line, int i);
- 
- //map.c
- 
- void	fill_map(char **line, char **map);
+//filll_values.c
+
+int			fill_values(char **line, t_dir *dir, int i);
+void		fill_color(char **line, t_dir *dir, int i);
+int			ft_check(char *str);
+int			check_color(char *str, int i);
+int			check_file(char *line, int i);
+
+//map.c
+
+void		fill_map(char **line, char **map);
 //  char	**fill_map(char **line, char **map);
- int	space_before(char *str);
- 
+int			space_before(char *str);
+
 #endif

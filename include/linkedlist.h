@@ -13,8 +13,8 @@
 #ifndef LINKEDLIST_H
 # define LINKEDLIST_H
 
-#include "stdio.h"
-#include "stdlib.h"
+# include "stdio.h"
+# include "stdlib.h"
 
 typedef struct s_node		t_node;
 

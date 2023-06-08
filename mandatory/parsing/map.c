@@ -12,30 +12,6 @@
 
 #include "cub3D.h"
 
-// char **fill_map(char **line, char **map)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	j = -1;
-// 	while (line[++i] == NULL)
-// 		;
-// 	i--;
-// 	while(line[++i])
-// 	{
-// 		map[++j] = line[i];
-// 		line[i] = NULL;
-// 		// printf("map -%s-\n", map[j]);
-// 	}
-// 	map[j] = NULL;
-// 	// j = 0;
-// 	// while (map[j++])
-// 	// 	printf("map = %s\n", map[j]);
-// 		// printf("map = %s\n", map[j]);
-// 	return(map);
-// }
-
 int	get_maxlen(char **line)
 {
 	int	i;

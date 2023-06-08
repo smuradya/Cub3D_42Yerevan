@@ -12,14 +12,14 @@
 
 #include "cub3D.h"
 
-int check_file(char *line, int i)
+int	check_file(char *line, int i)
 {
-	int len;
+	int	len;
 	int	fd;
-	
+
 	len = ft_strlen(line) - 1;
-	if (line[len] != 'm' && line[len - 1] != 'p' &&
-		line[len - 2] != 'x' && line[len - 3] != '.')
+	if (line[len] != 'm' && line[len - 1] != 'p'
+		&& line[len - 2] != 'x' && line[len - 3] != '.')
 	{
 		printf("Not valid image file\n");
 		exit (1);
@@ -35,13 +35,13 @@ int check_file(char *line, int i)
 	return (0);
 }
 
-int check_color(char *str, int i)
+int	check_color(char *str, int i)
 {
-	int result;
-	int rgb;
-	int rgb1;
-	int rgb2;
-	
+	int	result;
+	int	rgb;
+	int	rgb1;
+	int	rgb2;
+
 	if (str && str[i])
 	{
 		if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
@@ -49,7 +49,7 @@ int check_color(char *str, int i)
 			rgb = ft_atoi(str + i);
 			while (str[i] && str[i] >= '0' && str[i] <= '9')
 				i++;
-			if(str[i] && str[i] == ',')
+			if (str[i] && str[i] == ',')
 			{
 				i++;
 				if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
@@ -57,7 +57,7 @@ int check_color(char *str, int i)
 					rgb1 = ft_atoi(str + i);
 					while (str[i] && str[i] >= '0' && str[i] <= '9')
 						i++;
-					if(str[i] && str[i] == ',')
+					if (str[i] && str[i] == ',')
 					{
 						i++;
 						if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
@@ -117,8 +117,8 @@ void fill_color(char **line, t_dir *dir, int i)
 
 	floor = NULL;
 	ceiling = NULL;
-	if ((ft_check(line[i]) == 5 || ft_check(line[i]) == 6) &&
-			ft_strrchr(line[i], '-') == 0)
+	if ((ft_check(line[i]) == 5 || ft_check(line[i]) == 6)
+		&& ft_strrchr(line[i], '-') == 0)
 	{
 		if (ft_check(line[i]) == 5)
 		{
