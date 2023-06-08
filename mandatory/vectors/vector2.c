@@ -12,29 +12,43 @@
 
 #include "../include/cub3D.h"
 
-t_vector	new_vector(double x, double y)
+t_vector	vector_inverse(t_vector vector)
 {
 	t_vector	new_vector;
 
-	new_vector.x = x;
-	new_vector.y = y;
+	new_vector.x = vector.y;
+	new_vector.y = -vector.x;
 	return (new_vector);
 }
 
-t_vector	copy_vector(t_vector source)
+double	vector_lenght(t_vector vector)
 {
-	t_vector	copy;
-
-	copy.x = source.x;
-	copy.y = source.y;
-	return (copy);
+	return (sqrt(vector.x * vector.x + vector.y * vector.y));
 }
 
-t_mouse	init_mouse(void)
+t_vector	vector_sum(t_vector first, t_vector second)
 {
-	t_mouse	tmp_mouse;
+	t_vector	new_vector;
 
-	tmp_mouse.horiz = WIN_WIDTH / 2;
-	tmp_mouse.vertic = WIN_HEIGHT / 2;
-	return (tmp_mouse);
+	new_vector.x = first.x + second.x;
+	new_vector.y = first.y + second.y;
+	return (new_vector);
+}
+
+t_vector	vector_diff(t_vector first, t_vector second)
+{
+	t_vector	new_vector;
+
+	new_vector.x = first.x - second.x;
+	new_vector.y = first.y - second.y;
+	return (new_vector);
+}
+
+t_vector	vector_product(t_vector first, t_vector second)
+{
+	t_vector	new_vector;
+
+	new_vector.x = first.x * second.x;
+	new_vector.y = first.y * second.y;
+	return (new_vector);
 }

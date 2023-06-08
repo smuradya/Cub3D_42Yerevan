@@ -12,101 +12,6 @@
 
 #include "cub3D.h"
 
-int	ft_map_wall(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] && str[i] == ' ')
-		i++;
-	while (str && str[i] && str[i] == '1')
-		i++;
-	if (str && str[i] == '\0')
-		return (0);
-	return (1);
-}
-
-int	ft_around(char *s1, char *s, char *s2)
-{
-	int	i;
-	int	l;
-	int	j;
-
-	i = 0;
-	l = 0;
-	j = 0;
-	while (s && s[i])
-	{
-		if ((s[i] == '0' || s[i] == 'N'
-				|| s[i] == 'E' || s[i] == 'W'
-				|| s[i] == 'S') && (s[i + 1] == ' '
-				|| s1[i] == ' ' || s2[i] == ' '))
-			return (1);
-		i++;
-	}
-	i = 0;
-	while (s && s[i])
-		i++;
-	while (s && s[i] != '0' && i > 0)
-		i--;
-	l = ft_strlen(s1);
-	if (i >= l)
-		return (1);
-	j = ft_strlen(s2);
-	if (i >= j)
-		return (1);
-	return (0);
-}
-
-int	ft_wall_around(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] && str[i] == ' ')
-		i++;
-	if (str && str[i] && str[i] != '1')
-		return (1);
-	while (str && str[i])
-		i++;
-	i--;
-	if (str && str[i] != '1')
-		return (1);
-	return (0);
-}
-
-int	ft_other_char(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] && str[i] != '1' && str[i] != '0'
-			&& str[i] != 'N' && str[i] != 'S' && str[i] != 'W'
-			&& str[i] != 'E' && str[i] != ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_is_pos(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
-			++count;
-		i++;
-	}
-	return (count);
-}
-
 void	find_position(t_dir *dir)
 {
 	int	i;
@@ -215,7 +120,7 @@ void	check_validation(t_map	*map, t_dir *dir)
 	if (last_row_check >= 1 && last_row_check <= 6)
 	{
 		printf("file is incorrect");
-		exit(1);	
+		exit (1);	
 	}
 	i = -1;
 	while (map->line[++i])
@@ -226,7 +131,6 @@ void	check_validation(t_map	*map, t_dir *dir)
 			break ;
 	}
 	map_size = map->index - i + 1;
-	printf("i = %d\n", map_size);
 	dir->map = malloc(sizeof(char *) * (map_size + 1));
 	dir->map[map_size] = 0;
 	fill_map(map->line + i, dir->map);
@@ -235,9 +139,6 @@ void	check_validation(t_map	*map, t_dir *dir)
 		printf("file is incorrect");
 		exit(1);
 	}
-	i = -1;
-	while (dir->map[++i])
-		printf("%s\n", dir->map[i]);
-	ft_val_map(dir->map);
-	find_position(dir);
+	ft_val_map (dir->map);
+	find_position (dir);
 }

@@ -12,60 +12,32 @@
 
 #include "cub3D.h"
 
-static size_t	wordlen(char const *s, char c)
+unsigned int	get_img_color(t_img img, int x, int y)
 {
-	size_t	index;
+	char	*dst;
 
-	index = 0;
-	while (*s)
-	{
-		index++;
-		while (*s && *s == c)
-		s++;
-		if (*s == '\0')
-			index--;
-		while (*s && *s != c)
-			s++;
-	}
-	return (index);
+	if (!img.img)
+		return (0);
+	dst = img.data_addr + (y * img.size_line + x
+			* (img.bits_per_pixel / 8));
+	return ((unsigned int)dst);
 }
 
-static char	**fill_string(char **store, char const *s, char c)
+unsigned int	*get_img_colors(t_img img)
 {
-	size_t	len;
-	size_t	i;
+	int					i;
+	int					j;
+	int					k;
+	unsigned int		*ptr;
 
-	i = 0;
-	while (*s)
+	ptr = malloc(sizeof(unsigned int) * 64 * 64);
+	i = -1;
+	while (++i < 64)
 	{
-		if (*s != c)
-		{
-			len = 0;
-			while (*s && *s != c)
-			{
-				len++;
-				s++;
-			}
-			store[i++] = ft_substr(s - len, 0, len);
-		}
-		else
-			s++;
+		j = -1;
+		k = 64;
+		while (++j < 64 && --k > -1)
+			ptr[64 * k + i] = get_img_color(img, j, i);
 	}
-	store[i] = 0;
-	return (store);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**split_string;
-	size_t	len_words;
-
-	if (!s)
-		return (NULL);
-	len_words = wordlen(s, c);
-	split_string = malloc(sizeof(char *) * (len_words + 1));
-	if (!split_string)
-		return (NULL);
-	split_string = fill_string(split_string, s, c);
-	return (split_string);
+	return (ptr);
 }
