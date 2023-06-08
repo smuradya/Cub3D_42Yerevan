@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/08 16:01:51 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:55:53 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int			ft_map_wall(char *str)
+int	ft_map_wall(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i] && str[i] == ' ')
@@ -26,21 +26,21 @@ int			ft_map_wall(char *str)
 	return (1);
 }
 
-int		ft_around(char *s1, char *s, char *s2)
+int	ft_around(char *s1, char *s, char *s2)
 {
-	int i;
-	int l;
-	int j;
+	int	i;
+	int	l;
+	int	j;
 
 	i = 0;
 	l = 0;
 	j = 0;
 	while (s && s[i])
 	{
-		if ((s[i] == '0' || s[i] == 'N' ||
-			s[i] == 'E' || s[i] == 'W' ||
-			s[i] == 'S') && (s[i + 1] == ' ' ||
-			s1[i] == ' ' || s2[i] == ' '))
+		if ((s[i] == '0' || s[i] == 'N'
+				|| s[i] == 'E' || s[i] == 'W'
+				|| s[i] == 'S') && (s[i + 1] == ' '
+				|| s1[i] == ' ' || s2[i] == ' '))
 			return (1);
 		i++;
 	}
@@ -58,9 +58,9 @@ int		ft_around(char *s1, char *s, char *s2)
 	return (0);
 }
 
-int			ft_wall_around(char *str)
+int	ft_wall_around(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i] && str[i] == ' ')
@@ -77,24 +77,24 @@ int			ft_wall_around(char *str)
 
 int	ft_other_char(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i])
 	{
-		if (str[i] && str[i] != '1' && str[i] != '0' &&
-			str[i] != 'N' && str[i] != 'S' && str[i] != 'W' &&
-			str[i] != 'E' && str[i] != ' ')
+		if (str[i] && str[i] != '1' && str[i] != '0'
+			&& str[i] != 'N' && str[i] != 'S' && str[i] != 'W'
+			&& str[i] != 'E' && str[i] != ' ')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int		ft_is_pos(char *str)
+int	ft_is_pos(char *str)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;

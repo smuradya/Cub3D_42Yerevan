@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/20 17:48:40 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:04:33 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ unsigned int    get_img_color(t_img img, int x, int y)
 
     if (!img.img)
         return (0);
-    dst = img.data_addr + (y * img.size_line + x * (img.bits_per_pixel / 8));
+        dst = img.data_addr + (y * img.size_line + x
+            * (img.bits_per_pixel / 8));
     return ((unsigned int)dst);
 }
 
@@ -27,7 +28,7 @@ unsigned int    *get_img_colors(t_img img)
     int                i;
     int                j;
     int                k;
-    unsigned int		*ptr;
+    unsigned int    *ptr;
 
     ptr = malloc(sizeof(unsigned int) * 64 * 64);
     i = -1;

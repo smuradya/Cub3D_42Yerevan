@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:04:16 by smuradya          #+#    #+#             */
-/*   Updated: 2023/05/20 17:57:16 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:52:27 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,14 +129,6 @@ unsigned int	get_texture_color(t_data *data)
 
 	color = *(unsigned int *)(img.data_addr + (tex_y * img.bits_per_pixel / 8)
 			+ img.size_line * data->draw.tex_x);
-    // if (data->draw.side == 0 && data->ray.x > 0)
-    //     color = data->textures->south.texture[tex_y + 64 * data->draw.tex_x];
-    // else if (data->draw.side == 0 && data->ray.x < 0)
-    //     color = data->textures->north.texture[tex_y + 64 * data->draw.tex_x];
-    // else if (data->draw.side == 1 && data->ray.y < 0)
-    //     color = data->textures->west.texture[tex_y + 64 * data->draw.tex_x];
-    // else if (data->draw.side == 1 && data->ray.y > 0)
-    //     color = data->textures->east.texture[tex_y + 64 * data->draw.tex_x];
 	return (color);
 }
 
@@ -150,18 +142,22 @@ void	draw_line(t_data *data, int colomn)
 	start = data->draw_start - 1;
 	end = data->draw_end - 1;
 	while (++i < data->draw_start)
-		*((unsigned int *)data->frame->data_addr + (i * WIN_WIDTH + colomn)) = data->map_data.ceiling;
+		*((unsigned int *)data->frame->data_addr
+				+ (i * WIN_WIDTH + colomn)) = data->map_data.ceiling;
 	while (++start < data->draw_end)
-		*(unsigned int *)(data->frame->data_addr + (start * data->frame->size_line
-			+ colomn * (data->frame->bits_per_pixel / 8))) = get_texture_color(data);
-		// *((unsigned int *)data->frame->data_addr + (start * WIN_WIDTH + colomn)) = get_texture_color(data);
+		*(unsigned int *)(data->frame->data_addr
+				+ (start * data->frame->size_line
+					+ colomn * (data->frame->bits_per_pixel / 8)))
+			= get_texture_color(data);
 	while (++end < WIN_HEIGHT)
-		*((unsigned int *)data->frame->data_addr + (end * WIN_WIDTH + colomn)) = data->map_data.floor;
+		*((unsigned int *)data->frame->data_addr + (end * WIN_WIDTH + colomn))
+			= data->map_data.floor;
 }
 
 double	init_tex_pos(t_data *data, t_draw draw)
 {
-	return ((data->draw_start - WIN_HEIGHT / 2 + draw.line_height / 2) * draw.ratio);
+	return ((data->draw_start - WIN_HEIGHT / 2
+			+ draw.line_height / 2) * draw.ratio);
 }
 
 double	wall_x(t_data *data, t_draw draw)

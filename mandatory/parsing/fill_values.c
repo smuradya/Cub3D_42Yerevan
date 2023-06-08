@@ -6,7 +6,7 @@
 /*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/05/20 15:32:44 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:56:21 by smuradya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	ft_check(char *str)
 	return (value);
 }
 
-void fill_color(char **line, t_dir *dir, int i)
+void	fill_color(char **line, t_dir *dir, int i)
 {
 	char	*floor;
 	char	*ceiling;
