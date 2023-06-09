@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 14:50:57 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:04:34 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	read_file(t_map *map, char *filename, char *line)
 		map->index = i;
 		line = get_next_line(map->fd);
 	}
+	free(line);
 }
 
 int	parsing(char *filename, t_map *map)
