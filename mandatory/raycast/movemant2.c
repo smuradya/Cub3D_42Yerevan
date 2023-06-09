@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movemant.c                                         :+:      :+:    :+:   */
+/*   movemant2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/08 20:41:31 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:49:57 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	s_key(t_data *data)
 		[(int)(data->player.pos.y)] != '1')
 		data->player.pos.x -= data->player.dir.x * 0.2;
 	if (data->map_data.map[(int)(data->player.pos.x)]
-		[(int)(data->player.pos.y - data->player.dir.y * 0.2)] != '1')	
+		[(int)(data->player.pos.y - data->player.dir.y * 0.2)] != '1')
 		data->player.pos.y -= data->player.dir.y * 0.2;
 }
 

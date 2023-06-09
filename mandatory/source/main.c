@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 15:05:50 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:51:22 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	arg_validation(int argc, char *argv)
 	if (argc != 2)
 	{
 		write (1, "Argc error\n", 11);
-		return (1);	
+		return (1);
 	}
 	len = ft_strlen(argv) - 1;
 	if (argv[len] == 'b' && argv[len - 1] == 'u'

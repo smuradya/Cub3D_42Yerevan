@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/05/27 16:05:09 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:51:45 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ struct	s_textures
 	t_img			west;
 	t_img			south;
 };
-
 
 struct	s_data
 {
