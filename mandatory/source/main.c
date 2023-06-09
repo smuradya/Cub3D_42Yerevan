@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/08 21:23:20 by tumolabs         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:05:50 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (arg_validation(argc, argv[1]) != 0)
 		return (1);
-	if (!(dir = malloc (sizeof(t_dir))))
+	dir = malloc (sizeof(t_dir));
+	if (!(dir))
 		return (1);
 	map = malloc (sizeof(t_map));
 	parsing(argv[1], map);

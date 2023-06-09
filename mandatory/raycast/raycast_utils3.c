@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_utils.c                                    :+:      :+:    :+:   */
+/*   raycast_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:04:16 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/08 20:52:27 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:56:51 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	start_and_end(t_data *data)
 {
-
 	if (data->draw.side == 0)
 		data->player.wall_dis = (data->dist.x - data->delta_dist.x);
 	else
@@ -27,7 +26,6 @@ void	start_and_end(t_data *data)
 	if (data->draw_end >= WIN_HEIGHT || data->draw_end < 0)
 		data->draw_end = WIN_HEIGHT - 1;
 }
-
 
 unsigned int	get_texture_color(t_data *data)
 {
@@ -46,7 +44,6 @@ unsigned int	get_texture_color(t_data *data)
 		img = data->textures->west;
 	else if (data->draw.side == 1 && data->ray.y > 0)
 		img = data->textures->east;
-
 	color = *(unsigned int *)(img.data_addr + (tex_y * img.bits_per_pixel / 8)
 			+ img.size_line * data->draw.tex_x);
 	return (color);

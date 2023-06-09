@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:54:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/08 20:37:29 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:10:44 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			cub_init(t_dir *dir, t_data *data);
 void			setup_player(t_data *data, t_dir *dir);
 int				ft_is_pos(char *str);
 int				ft_other_char(char *str);
+void			free_exit(char *str);
 
 // utils.c
 

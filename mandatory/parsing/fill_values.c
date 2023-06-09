@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_values.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/08 20:56:21 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:11:13 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ int	check_file(char *line, int i)
 	int	fd;
 
 	len = ft_strlen(line) - 1;
-	if (line[len] != 'm' && line[len - 1] != 'p'
-		&& line[len - 2] != 'x' && line[len - 3] != '.')
-	{
-		printf("Not valid image file\n");
-		exit (1);
-	}
+	if (line[len] != 'm' || line[len - 1] != 'p'
+		|| line[len - 2] != 'x' || line[len - 3] != '.')
+		free_exit("Not valid image file");
 	fd = open (line + i, O_RDONLY);
 	if (fd == -1)
 	{
@@ -35,48 +32,14 @@ int	check_file(char *line, int i)
 	return (0);
 }
 
-int	check_color(char *str, int i)
+void	free_splitted(char **splitted)
 {
-	int	result;
-	int	rgb;
-	int	rgb1;
-	int	rgb2;
+	int	i;
 
-	if (str && str[i])
-	{
-		if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
-		{
-			rgb = ft_atoi(str + i);
-			while (str[i] && str[i] >= '0' && str[i] <= '9')
-				i++;
-			if (str[i] && str[i] == ',')
-			{
-				i++;
-				if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
-				{
-					rgb1 = ft_atoi(str + i);
-					while (str[i] && str[i] >= '0' && str[i] <= '9')
-						i++;
-					if (str[i] && str[i] == ',')
-					{
-						i++;
-						if (ft_atoi(str + i) >= 0 && ft_atoi(str + i) <= 255)
-						{
-							rgb2 = ft_atoi(str + i);
-							while (str[i] && str[i] >= '0' && str[i] <= '9')
-								i++;
-							if (str[i] == '\0')
-							{
-								result = (rgb << 16) | (rgb1 << 8) | (rgb2);
-								return (result);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return (1);
+	i = -1;
+	while (splitted[++i])
+		free(splitted[i]);
+	free(splitted);
 }
 
 int	ft_check(char *str)
@@ -87,6 +50,7 @@ int	ft_check(char *str)
 
 	splitted = ft_split(str, ' ');
 	i = -1;
+	value = 0;
 	while (splitted[++i])
 		;
 	if (i != 2)
@@ -103,10 +67,7 @@ int	ft_check(char *str)
 		value = 5;
 	else if (!ft_strcmp(splitted[0], "C"))
 		value = 6;
-	i = -1;
-	while (splitted[++i])
-		free(splitted[i]);
-	free(splitted);
+	free_splitted(splitted);
 	return (value);
 }
 
@@ -136,38 +97,5 @@ void	fill_color(char **line, t_dir *dir, int i)
 		}
 	}
 	else
-	{
-		write (1, "Color error\n", 12);
-		exit (1);
-	}
-}
-
-int	fill_values(char **line, t_dir *dir, int i)
-{
-	int	check_value;
-
-	check_value = ft_check(line[i]);
-	if (check_value == 1)
-	{
-		if (check_file(line[i], 3) == 0)
-			dir->north = ft_strdup(line[i] + 3);
-	}
-	else if (check_value == 2)
-	{
-		if (check_file(line[i], 3) == 0)
-			dir->south = ft_strdup(line[i] + 3);
-	}
-	else if (check_value == 3)
-	{
-		if (check_file(line[i], 3) == 0)
-			dir->west = ft_strdup(line[i] + 3);
-	}
-	else if (check_value == 4)
-	{
-		if (check_file(line[i], 3) == 0)
-			dir->east = ft_strdup(line[i] + 3);
-	}
-	else if (check_value == 5 || check_value == 6)
-		fill_color(line, dir, i);
-	return (check_value != 0);
+		free_exit("Color error");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movemant.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/08 20:41:31 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:09:58 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ int	key_code(int k, t_data *data)
 	return (1);
 }
 
+void	movemant_one(t_vector old_dir, t_vector old_plane, t_data *data)
+{
+	data->player.dir.x = old_dir.x * cos(SENSITIVITY * (-1)) - old_dir.y
+		* sin(SENSITIVITY * (-1));
+	data->player.dir.y = old_dir.x * sin(SENSITIVITY * (-1)) + old_dir.y
+		* cos(SENSITIVITY * (-1));
+	data->plane.x = old_plane.x * cos(SENSITIVITY * (-1)) - old_plane.y
+		* sin(SENSITIVITY * (-1));
+	data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y
+		* cos(SENSITIVITY * (-1));
+}
+
+void	movemant_two(t_vector old_dir, t_vector old_plane, t_data *data)
+{
+	data->player.dir.x = old_dir.x * cos(SENSITIVITY) - old_dir.y
+		* sin(SENSITIVITY);
+	data->player.dir.y = old_dir.x * sin(SENSITIVITY) + old_dir.y
+		* cos(SENSITIVITY);
+	data->plane.x = old_plane.x * cos(SENSITIVITY) - old_plane.y
+		* sin(SENSITIVITY);
+	data->plane.y = old_plane.x * sin(SENSITIVITY) + old_plane.y
+		* cos(SENSITIVITY);
+}
+
 void	movemant(int k, t_data *data)
 {	
 	t_vector	old_dir;
@@ -45,64 +69,7 @@ void	movemant(int k, t_data *data)
 	old_plane = copy_vector(data->plane);
 	old_dir = copy_vector(data->player.dir);
 	if (k == 124)
-	{
-		data->player.dir.x = old_dir.x * cos(SENSITIVITY * (-1)) - old_dir.y
-			* sin(SENSITIVITY * (-1));
-		data->player.dir.y = old_dir.x * sin(SENSITIVITY * (-1)) + old_dir.y
-			* cos(SENSITIVITY * (-1));
-		data->plane.x = old_plane.x * cos(SENSITIVITY * (-1)) - old_plane.y
-			* sin(SENSITIVITY * (-1));
-		data->plane.y = old_plane.x * sin(SENSITIVITY * (-1)) + old_plane.y
-			* cos(SENSITIVITY * (-1));
-	}
+		movemant_one(old_dir, old_plane, data);
 	if (k == 123)
-	{
-		data->player.dir.x = old_dir.x * cos(SENSITIVITY) - old_dir.y
-			* sin(SENSITIVITY);
-		data->player.dir.y = old_dir.x * sin(SENSITIVITY) + old_dir.y
-			* cos(SENSITIVITY);
-		data->plane.x = old_plane.x * cos(SENSITIVITY) - old_plane.y
-			* sin(SENSITIVITY);
-		data->plane.y = old_plane.x * sin(SENSITIVITY) + old_plane.y
-			* cos(SENSITIVITY);
-	}
-}
-
-int	mouse_move(int x, int y, t_data *data)
-{
-	t_vector	old_dir;
-	t_vector	old_plane;
-
-	old_dir = copy_vector(data->player.dir);
-	old_plane = copy_vector(data->plane);
-
-	if (data->mouse.horiz != WIN_WIDTH / 2)
-	{
-		if (data->mouse.horiz < x)
-		{
-			data->player.dir.x = old_dir.x * cos(ROT_MOUSE * (-1)) - old_dir.y
-				* sin(ROT_MOUSE * (-1));
-			data->player.dir.y = old_dir.x * sin(ROT_MOUSE * (-1)) + old_dir.y
-				* cos(ROT_MOUSE * (-1));
-			data->plane.x = old_plane.x * cos(ROT_MOUSE * (-1)) - old_plane.y
-				* sin(ROT_MOUSE * (-1));
-			data->plane.y = old_plane.x * sin(ROT_MOUSE * (-1)) + old_plane.y
-				* cos(ROT_MOUSE * (-1));
-		}
-		if (data->mouse.horiz > x)
-		{
-			data->player.dir.x = old_dir.x * cos(ROT_MOUSE) - old_dir.y
-				* sin(ROT_MOUSE);
-			data->player.dir.y = old_dir.x * sin(ROT_MOUSE) + old_dir.y
-				* cos(ROT_MOUSE);
-			data->plane.x = old_plane.x * cos(ROT_MOUSE) - old_plane.y
-				* sin(ROT_MOUSE);
-			data->plane.y = old_plane.x * sin(ROT_MOUSE) + old_plane.y
-				* cos(ROT_MOUSE);
-		}
-	}
-	data->mouse.horiz = x;
-	data->mouse.vertic = y;
-	game_start(data);
-	return (1);
+		movemant_two(old_dir, old_plane, data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/08 20:55:53 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:11:41 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void	check_map(char **map)
 	}
 }
 
+void	free_exit(char *str)
+{
+	printf ("%s\n", str);
+	exit (1);
+}
+
 void	ft_val_map(char **map)
 {
 	int	i;
@@ -74,38 +80,14 @@ void	ft_val_map(char **map)
 				|| map[i][j] == 'E' || map[i][j] == 'W'
 				|| map[i][j] == 'S') && (map[i][j + 1] == '\n'
 				|| map[i][j + 1] == ' ' || map[i][j + 1] == '\0'
-				|| map[i][j + 1] == '\t'))
-			{
-				printf ("MAP ERROR\n");
-				exit (1);
-			}
-			if ((map[i][j] == '0' || map[i][j] == 'N'
-				|| map[i][j] == 'E' || map[i][j] == 'W'
-				|| map[i][j] == 'S') && (map[i][j - 1] == '\n'
+				|| map[i][j + 1] == '\t' || map[i][j - 1] == '\n'
 				|| map[i][j - 1] == ' ' || map[i][j - 1] == '\0'
-				|| map[i][j - 1] == '\t'))
-			{
-				printf ("MAP ERROR\n");
-				exit (1);
-			}
-			if ((map[i][j] == '0' || map[i][j] == 'N'
-				|| map[i][j] == 'E' || map[i][j] == 'W'
-				|| map[i][j] == 'S') && (map[i + 1][j] == '\n'
+				|| map[i][j - 1] == '\t' || map[i + 1][j] == '\n'
 				|| map[i + 1][j] == ' ' || map[i + 1][j] == '\0'
-				|| map[i + 1][j] == '\t'))
-			{
-				printf ("MAP ERROR\n");
-				exit (1);
-			}
-			if ((map[i][j] == '0' || map[i][j] == 'N'
-				|| map[i][j] == 'E' || map[i][j] == 'W'
-				|| map[i][j] == 'S') && (map[i - 1][j] == '\n'
+				|| map[i + 1][j] == '\t' || map[i - 1][j] == '\n'
 				|| map[i - 1][j] == ' ' || map[i - 1][j] == '\0'
 				|| map[i - 1][j] == '\t'))
-			{
-				printf ("MAP ERROR\n");
-				exit (1);
-			}
+				free_exit("Map Error");
 		}
 	}
 }
@@ -118,10 +100,7 @@ void	check_validation(t_map	*map, t_dir *dir)
 
 	last_row_check = ft_check(map->line[map->index]);
 	if (last_row_check >= 1 && last_row_check <= 6)
-	{
-		printf("file is incorrect");
-		exit (1);	
-	}
+		free_exit("File is incorrect");
 	i = -1;
 	while (map->line[++i])
 	{
@@ -135,10 +114,7 @@ void	check_validation(t_map	*map, t_dir *dir)
 	dir->map[map_size] = 0;
 	fill_map(map->line + i, dir->map);
 	if (dir->east == 0 || dir->west == 0 || dir->south == 0 || dir->north == 0)
-	{
-		printf("file is incorrect");
-		exit(1);
-	}
+		free_exit("File is incorrect");
 	ft_val_map (dir->map);
 	find_position (dir);
 }

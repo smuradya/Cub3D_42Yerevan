@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   linkedlist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smuradya <smuradya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:32:54 by smuradya          #+#    #+#             */
-/*   Updated: 2023/04/15 17:11:25 by smuradya         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:55:21 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "linkedlist.h"
 #include "string.h"
-
 
 t_list	*new_list(void)
 {
