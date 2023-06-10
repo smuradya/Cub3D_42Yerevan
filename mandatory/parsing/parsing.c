@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 19:46:52 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:40:06 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ int	parsing(char *filename, t_map *map)
 	{
 		++count;
 		line = get_next_line(map->fd);
+		free (line);
 	}
+	free (line);
 	close (map->fd);
 	map->line = malloc(sizeof(char *) * (count + 1));
 	map->line[count] = 0;
 	read_file(map, filename, line);
-	free (line);
+	// free (line);
 	return (0);
 }

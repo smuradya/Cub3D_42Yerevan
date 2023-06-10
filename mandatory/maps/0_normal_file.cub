@@ -4,6 +4,7 @@ SO ./mandatory/images/wall4.xpm
 WE ./mandatory/images/wall2.xpm
 EA ./mandatory/images/colorstone.xpm
 
+
 F 152,112,72
 C 204,255,255
 

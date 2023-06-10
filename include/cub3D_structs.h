@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:44 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/09 15:51:45 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:41:57 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ struct	s_textures
 struct	s_data
 {
 	void			*mlx;
-	char			**sdl;
 	void			*window;
 	t_textures		*textures;
 	t_player		player;

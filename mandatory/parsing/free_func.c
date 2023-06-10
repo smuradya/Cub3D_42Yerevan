@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 21:13:12 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 21:17:48 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:57:17 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,21 @@ void	free_exit(char *str)
 
 void	free_exit_map(t_map *map, char *str)
 {
-	int	i;
+	(void)map;
+// 	int	i;
 
-	i = 0;
-	if (map)
-	{
-		while (map)
-		{
-			if (map->line[i])
-				free(map->line[i]);
-			i++;
-		}
-	}
-	free(map);
+// 	i = -1;
+// 	if (map->line)
+// 		return ;
+// 	while (map->line[++i])
+// 	{
+// 		if (!(map->line[i]))
+// 			return ;
+// 		free(map->line[i]);
+// 	}
+// 	free(map->line[i]);
+// 	free(map->line);
+// 	free(map);
 	if (str != NULL)
 	{
 		printf ("%s\n", str);
