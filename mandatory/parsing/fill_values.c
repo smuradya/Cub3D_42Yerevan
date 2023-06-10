@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 15:11:13 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/09 21:26:00 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ void	fill_color(char **line, t_dir *dir, int i)
 		}
 	}
 	else
-		free_exit("Color error");
+		free_exit_dir(dir, "Color error");
 }

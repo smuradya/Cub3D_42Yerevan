@@ -1,13 +1,11 @@
 
-NO ./mandatory/images/lift2.xpm
-SO ./mandatory/images/bluestone.xpm
-WE ./mandatory/images/download.xpm
+NO ./mandatory/images/wall.xpm
+SO ./mandatory/images/wall4.xpm
+WE ./mandatory/images/wall2.xpm
 EA ./mandatory/images/colorstone.xpm
 
-
-
-F 0,20,0
-C 120,0,3
+F 152,112,72
+C 204,255,255
 
 111111111111111111111111111111111111111111111111111111111111111
 10010000000010000000000010000000000001000000000000000000000000011

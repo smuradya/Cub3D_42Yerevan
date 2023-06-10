@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 14:11:41 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/09 21:14:49 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ void	check_map(char **map)
 	}
 }
 
-void	free_exit(char *str)
-{
-	printf ("%s\n", str);
-	exit (1);
-}
-
 void	ft_val_map(char **map)
 {
 	int	i;
@@ -100,7 +94,7 @@ void	check_validation(t_map	*map, t_dir *dir)
 
 	last_row_check = ft_check(map->line[map->index]);
 	if (last_row_check >= 1 && last_row_check <= 6)
-		free_exit("File is incorrect");
+		free_exit_map(map, "File is incorrect");
 	i = -1;
 	while (map->line[++i])
 	{
@@ -114,7 +108,7 @@ void	check_validation(t_map	*map, t_dir *dir)
 	dir->map[map_size] = 0;
 	fill_map(map->line + i, dir->map);
 	if (dir->east == 0 || dir->west == 0 || dir->south == 0 || dir->north == 0)
-		free_exit("File is incorrect");
+		free_exit_dir(dir, "File is incorrect");
 	ft_val_map (dir->map);
 	find_position (dir);
 }

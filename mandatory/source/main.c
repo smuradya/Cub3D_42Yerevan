@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 15:51:22 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:24:34 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	main(int argc, char **argv)
 	t_dir	*dir;
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
 	if (arg_validation(argc, argv[1]) != 0)
-		return (1);
-	dir = malloc (sizeof(t_dir));
-	if (!(dir))
 		return (1);
 	map = malloc (sizeof(t_map));
 	parsing(argv[1], map);
+	dir = malloc (sizeof(t_dir));
+	if (!(dir))
+		return (1);
 	check_validation(map, dir);
+	data = malloc(sizeof(t_data));
 	cub_init(dir, data);
 	return (0);
 }
