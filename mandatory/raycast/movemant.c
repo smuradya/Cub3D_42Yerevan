@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:53:20 by smuradya          #+#    #+#             */
-/*   Updated: 2023/06/09 15:09:58 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:40:11 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	esc_code(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
+	system("leaks cub3D");
 	exit(0);
 	return (0);
 }

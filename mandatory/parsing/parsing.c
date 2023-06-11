@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/10 21:40:06 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:26:14 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ void	read_file(t_map *map, char *filename, char *line)
 	int	i;
 
 	map->fd = open(filename, O_RDONLY);
-	line = get_next_line(map->fd);
 	i = -1;
-	while (line)
+	while (1)
 	{
-		map->line[++i] = line;
+		line = get_next_line(map->fd);
+		if (!line)
+			break;
+		map->line[++i] = strdup(line);
 		map->line[i][ft_strlen(line) - 1] = 0;
 		map->index = i;
-		line = get_next_line(map->fd);
+		free(line);
 	}
-	free(line);
 }
 
 int	parsing(char *filename, t_map *map)
@@ -41,18 +42,18 @@ int	parsing(char *filename, t_map *map)
 	map->fd = open(filename, O_RDONLY);
 	if (map->fd == -1)
 		free_exit_map(map, "File error");
-	line = get_next_line(map->fd);
-	while (line)
+	while (1)
 	{
-		++count;
 		line = get_next_line(map->fd);
+		if (!line)
+			break;
+		++count;
 		free (line);
 	}
-	free (line);
 	close (map->fd);
 	map->line = malloc(sizeof(char *) * (count + 1));
+
 	map->line[count] = 0;
 	read_file(map, filename, line);
-	// free (line);
 	return (0);
 }

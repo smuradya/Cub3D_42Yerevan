@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/10 21:54:17 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:39:28 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ void	free_map(t_map *map)
 	int	i;
 
 	i = -1;
-	if (map->line)
-		return ;
 	while (map->line[++i])
 	{
-		if (!(map->line[i]))
-			return ;
 		free(map->line[i]);
 	}
 	free(map->line);
@@ -52,14 +48,8 @@ void	free_dir(t_dir *dir)
 	int	i;
 
 	i = -1;
-	if (dir->map)
-		return ;
 	while (dir->map[++i])
-	{
-		if (!(dir->map[i]))
-			return ;
 		free(dir->map[i]);
-	}
 	free(dir->north);
 	free(dir->south);
 	free(dir->west);
@@ -115,12 +105,12 @@ int	main(int argc, char **argv)
 		return (1);
 	map = malloc (sizeof(t_map));
 	parsing(argv[1], map);
-	// while (map->line[++i])
-	// 	printf ("{%s}\n", map->line[i]);
 	dir = malloc (sizeof(t_dir));
 	if (!(dir))
 		return (1);
 	check_validation(map, dir);
+	// system("leaks cub3D");
+	free_map(map);
 	data = malloc(sizeof(t_data));
 	cub_init(dir, data);
 	// mlx_destroy_image(data->mlx, data->textures->east.img);
@@ -129,7 +119,6 @@ int	main(int argc, char **argv)
 	// mlx_destroy_image(data->mlx, data->textures->north.img);
 	// free_map_dir_data(map, dir, data);
 	free_dir(dir);
-	free_map(map);
 	// free (data);
 	// sleep (1000);
 	return (0);

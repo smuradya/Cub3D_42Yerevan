@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:37 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/10 21:38:49 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:33:46 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	check_validation(t_map	*map, t_dir *dir)
 	int	last_row_check;
 
 	last_row_check = ft_check(map->line[map->index]);
+	// while (1) ;
+	// system("leaks cub3D");
+
 	if (last_row_check >= 1 && last_row_check <= 6)
 		free_exit_map(map, "File is incorrect");
 	i = -1;

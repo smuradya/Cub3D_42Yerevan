@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 21:26:00 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:51:23 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	ft_check(char *str)
 	int		i;
 	int		value;
 
+	// if (ft_strcmp (str, "1"))
+	// 	return (0);
+
 	splitted = ft_split(str, ' ');
 	i = -1;
 	value = 0;
@@ -86,14 +89,12 @@ void	fill_color(char **line, t_dir *dir, int i)
 			floor = line[i];
 			if (check_color(floor, 2) != 1)
 				dir->floor = check_color(line[i], 2);
-			line[i] = NULL;
 		}
 		else if (ft_check(line[i]) == 6)
 		{
 			ceiling = line[i];
 			if (check_color(ceiling, 2) != 1)
 				dir->ceiling = check_color(line[i], 2);
-			line[i] = NULL;
 		}
 	}
 	else
