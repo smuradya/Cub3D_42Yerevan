@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/11 21:26:14 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:46:14 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	read_file(t_map *map, char *filename, char *line)
 	{
 		line = get_next_line(map->fd);
 		if (!line)
-			break;
-		map->line[++i] = strdup(line);
+			break ;
+		map->line[++i] = ft_strdup(line);
 		map->line[i][ft_strlen(line) - 1] = 0;
 		map->index = i;
 		free(line);
@@ -46,13 +46,12 @@ int	parsing(char *filename, t_map *map)
 	{
 		line = get_next_line(map->fd);
 		if (!line)
-			break;
+			break ;
 		++count;
 		free (line);
 	}
 	close (map->fd);
 	map->line = malloc(sizeof(char *) * (count + 1));
-
 	map->line[count] = 0;
 	read_file(map, filename, line);
 	return (0);

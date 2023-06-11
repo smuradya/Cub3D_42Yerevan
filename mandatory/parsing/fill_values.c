@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:52:07 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/11 21:51:23 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:49:55 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,11 @@ void	free_splitted(char **splitted)
 	free(splitted);
 }
 
-int	ft_check(char *str)
+int	values(char **splitted)
 {
-	char	**splitted;
-	int		i;
 	int		value;
 
-	// if (ft_strcmp (str, "1"))
-	// 	return (0);
-
-	splitted = ft_split(str, ' ');
-	i = -1;
 	value = 0;
-	while (splitted[++i])
-		;
-	if (i != 2)
-		return (0);
 	if (!ft_strcmp(splitted[0], "NO"))
 		value = 1;
 	else if (!ft_strcmp(splitted[0], "SO"))
@@ -70,6 +59,26 @@ int	ft_check(char *str)
 		value = 5;
 	else if (!ft_strcmp(splitted[0], "C"))
 		value = 6;
+	return (value);
+}
+
+int	ft_check(char *str)
+{
+	char	**splitted;
+	int		value;
+	int		i;
+
+	splitted = ft_split(str, ' ');
+	i = -1;
+	value = 0;
+	while (splitted[++i])
+		;
+	if (i != 2)
+	{
+		free_splitted(splitted);
+		return (0);
+	}
+	value = values(splitted);
 	free_splitted(splitted);
 	return (value);
 }
