@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/11 21:39:28 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:30:28 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	free_dir(t_dir *dir)
 	i = -1;
 	while (dir->map[++i])
 		free(dir->map[i]);
+	free(dir->map);
 	free(dir->north);
 	free(dir->south);
 	free(dir->west);
 	free(dir->east);
-	free(dir->map);
 	free(dir);
 }
 
@@ -109,17 +109,17 @@ int	main(int argc, char **argv)
 	if (!(dir))
 		return (1);
 	check_validation(map, dir);
-	// system("leaks cub3D");
 	free_map(map);
 	data = malloc(sizeof(t_data));
 	cub_init(dir, data);
+	free_dir(dir);
+	return (0);
+}
+
 	// mlx_destroy_image(data->mlx, data->textures->east.img);
 	// mlx_destroy_image(data->mlx, data->textures->west.img);
 	// mlx_destroy_image(data->mlx, data->textures->south.img);
 	// mlx_destroy_image(data->mlx, data->textures->north.img);
 	// free_map_dir_data(map, dir, data);
-	free_dir(dir);
 	// free (data);
 	// sleep (1000);
-	return (0);
-}

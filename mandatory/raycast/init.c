@@ -6,7 +6,7 @@
 /*   By: anhakob2 <anhakob2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 20:16:20 by anhakob2          #+#    #+#             */
-/*   Updated: 2023/06/09 14:56:08 by anhakob2         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:41:24 by anhakob2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,27 @@ void	setup_player(t_data *data, t_dir *dir)
 			vector_inverse(data->player.dir));
 }
 
+char** copy_from(char** data)
+{
+	char** cpy;
+
+	int i = 0;
+	while(data && data[i]) ++i;
+	
+	
+	cpy = malloc(sizeof(char*) * i + 1);
+	cpy[i] = 0;
+	for(int j = 0; j < i; ++j)
+		cpy[i] = strdup(data[i]);
+	return cpy;
+}
+
 void	cub_init(t_dir *dir, t_data *data)
 {
 	t_img	*frame;
 
 	setup_player(data, dir);
-	data->map_data.map = dir->map;
+	data->map_data.map = copy_from(dir->map);
 	data->map_data.ceiling = dir->ceiling;
 	data->map_data.floor = dir->floor;
 	data->draw.step_x = 0;
